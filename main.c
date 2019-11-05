@@ -12,18 +12,18 @@ int		ft_error(int n)
 int		main(int argc, char **argv)
 {
 	int fd;
+	char	**tetrim;
 
-	if (argc == 2)
+	if (*argv && argc == 2)
 	{
-		if (*argv)
-			write(1,"all good", 8);
 	fd = open(argv[1], O_RDONLY);
-	if (!fd)
+	if (fd <= 0)
 	{
 		ft_error(1);
 		return (1);
 	}
-	read_file(fd);
+	//read_file(fd);
+	tetrim = storage(4, fd);
 	}
 	else
 		ft_error(2);

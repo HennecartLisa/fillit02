@@ -6,7 +6,7 @@
 /*   By: lhenneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:32:56 by lhenneca          #+#    #+#             */
-/*   Updated: 2019/11/05 16:06:26 by lhenneca         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:53:34 by lhenneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+int		ft_print(char tetra[4][5]);
 /*
  * read_file.h
  */
@@ -28,7 +29,7 @@ int		ft_check_file(char **str);
 /*
  * storage.c
  */
-int		sotrage(int nb_tetriminoes, int fd);
+char**		storage(int nb_tetriminoes, int fd);
 int		ft_create_double_array(int x, int y, char **array);
 int		ft_free(char **pt, int nb);
 
