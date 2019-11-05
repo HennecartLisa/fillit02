@@ -1,9 +1,4 @@
-#include "libft/libft.h"
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <limits.h>
+#include "fillit.h"
 
 //started function to check for '#', '.', and '\n'.
 int		ft_check_file(char **str)
@@ -44,20 +39,17 @@ int		ft_check_file(char **str)
 int		read_file(const int fd)
 {
 	int ret;
-	char buf[22];
+	char buf[BUFFER_SIZE + 1];
 	char **str;
 	int i;
 
 	i = -1;
 
-	if(!(str = (char **)malloc(sizeof(char *) * 21 + 1)))
+	if(!(str = (char **)malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (-1);
-
-
 	if ((fd < 0 || fd >= OPEN_MAX) || read(fd, buf, 0) < 0)
 		return (-1);
-	
-	while ((ret = read(fd, buf, 21)))
+	while ((ret = read(fd, buf, BUFFER_SIZE)))
 	{
 		buf[ret] = '\0';
 	//	ft_putstr(buf);
@@ -67,13 +59,3 @@ int		read_file(const int fd)
 	}
 	return (1);
 }
-
-int main ()
-{
-	int fd;
-
-	fd = open("tests/invalid_multiple/invalid_multiple_2", O_RDONLY);
-
-	read_file(fd);
-	return (0);
-}	
