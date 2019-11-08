@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhenneca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 13:32:56 by lhenneca          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/11/05 18:59:22 by zszeredi         ###   ########.fr       */
-=======
-/*   Updated: 2019/11/05 17:53:34 by lhenneca         ###   ########.fr       */
->>>>>>> 570cfa3cf67a1b3e1fa8e26806ab9170b7bf222f
+/*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
+/*   Updated: 2019/11/08 18:28:13 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef FILLIT_H
 # define FILLIT_H
@@ -25,11 +23,11 @@
 
 int		ft_print(char tetra[4][5]);
 /*
- * read_file.h
+ * read_file.c
  */
 int		read_file(const int fd);
-int		ft_check_nl(char **str, int i);
-int		ft_check_charachters(char **str, int i);
+int		ft_check_nl(char *str);//, int i);
+int		ft_check_charachters(char *str);// int i);
 
 /*
  * storage.c
