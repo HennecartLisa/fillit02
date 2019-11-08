@@ -6,7 +6,7 @@
 /*   By: lhenneca <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 13:32:56 by lhenneca          #+#    #+#             */
-/*   Updated: 2019/11/05 16:06:26 by lhenneca         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:59:22 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
  * read_file.h
  */
 int		read_file(const int fd);
-int		ft_check_file(char **str);
+int		ft_check_nl(char **str, int i);
+int		ft_check_charachters(char **str, int i);
 
 /*
  * storage.c

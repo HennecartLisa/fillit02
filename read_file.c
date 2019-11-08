@@ -1,61 +1,64 @@
 #include "fillit.h"
 
 //started function to check for '#', '.', and '\n'.
-int		ft_check_file(char **str)
+int		ft_checl_nl(char **str, int i)
 {
-	int i;
-	char a;
-	char b;
-	char c;
-	a = '#';
-	b = '.';
-	c = '\n';
-	i = 0;
-
-	ft_putstr(&str[0][0]);
-	while (str[1][i] != '\0')
-	{
-		i++;
-		if (str[1][4] != c)
+		if (str[i][5] != '\n' || str[i][9] != '\n' || str[i][14] != '\n' || str[i][19] != '\n' || str[i][20] != '\n')
 			return (-1);
-		if(str[1][9] != c)
-			return (-1);
-		if (str[1][14] != c)
-			return (-1);
-		if(str[1][19] != c)
-			return (-1);
-	}
-	str[1][i] = '\0';
-		/*if (a != 4)
-		return (-1);
-	if (b != 12)
-		return (-1);
-	if (c != 5)
-		return (-1);*/
-	return (0);
+		return(0);
 }
 
-//Made it go in a loop//
+int		ft_check_charachters(char **str, int i)
+{
+	int counter1;
+	int counter2;
+	int counter3;
+	int j;
+	j = 0;
+	counter1 = 0;
+	counter2 = 0;
+	counter3 = 0;
+	ft_putchar('\n');
+	ft_putstr(str[i]);
+	while (str[i][j] != '\0')
+	{
+		if (str[i][j] == '#')
+			counter1++;
+		if (str[i][j] == '.')
+			counter2++;
+		if (str[i][j] == '\n')
+			counter3++;
+		j++;
+	}
+	str[i][j] = '\0';
+	if (counter1 != 4 || counter2 != 12 || counter3 != 5)
+	{
+		ft_putnbr(counter1);
+		return (-1);
+	}
+		return (0);
+}
+//have to make it go in a loop until the whole file is read//
 int		read_file(const int fd)
 {
 	int ret;
 	char buf[BUFFER_SIZE + 1];
 	char **str;
 	int i;
+	int j;
 
 	i = -1;
-
+	j = 0;
 	if(!(str = (char **)malloc(sizeof(char *) * BUFFER_SIZE + 1)))
 		return (-1);
 	if ((fd < 0 || fd >= OPEN_MAX) || read(fd, buf, 0) < 0)
 		return (-1);
-	while ((ret = read(fd, buf, BUFFER_SIZE)))
-	{
-		buf[ret] = '\0';
+	ret = read(fd, buf, BUFFER_SIZE);
+	buf[ret] = '\0';	
 	//	ft_putstr(buf);
-		str[++i] = ft_strdup(buf);
+	str[++i] = ft_strdup(buf);
 	//	ft_putstr(str[1]);
-		ft_check_file(str);
-	}
-	return (1);
+	ft_check_charachters(&str[i], i);
+	ft_check_nl(&str[i], i);
+	return (0);
 }
