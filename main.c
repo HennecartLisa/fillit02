@@ -1,12 +1,9 @@
 #include "fillit.h"
 
-
 int		ft_error(int n)
 {
 	if (n == 1)
 		write (1, "usage", 5);
-	if (n == 2)
-		write (1, "wrong file", 10);
 	else
 		write(1, "else", 4);
 	return (0);
@@ -15,7 +12,7 @@ int		ft_error(int n)
 int		main(int argc, char **argv)
 {
 	int fd;
-//	char	**tetrim;
+	char	**tetrim;
 
 	if (*argv && argc == 2)
 	{
@@ -25,14 +22,10 @@ int		main(int argc, char **argv)
 		ft_error(1);
 		return (1);
 	}
-	if ((read_file(fd)) < 0)
-	{
+	vim read_file(fd);
+	tetrim = storage(4, fd);
+	}
+	else
 		ft_error(2);
-		return (1);
-	}
-//	tetrim = storage(4, fd);
-//	else
-//		ft_error(3);
-	}
 	return (0);
 }
