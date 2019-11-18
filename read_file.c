@@ -93,6 +93,7 @@ t_tetra *ft_store_teros(char **tetros, int nb)
     {
         m = 0;
         j = 0;
+		res[i].nb_tetros = nb - 1;
         while (m < 4)
         {
             n = 0;

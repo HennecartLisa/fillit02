@@ -20,7 +20,7 @@ void     ft_print_tetros(t_tetra *t)
 
     ft_putchar('\n');
     m = 0;
-    while (m < 5)
+    while (m < t[0].nb_tetros )
     {
         i = 0;
         while (i < 4)

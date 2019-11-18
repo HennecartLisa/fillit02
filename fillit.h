@@ -25,6 +25,7 @@
 typedef struct	s_tetra
 {
     int	tab[4][4];
+	int	nb_tetros;
 }				t_tetra;
 
 int		ft_print(char tetra[4][5]);
