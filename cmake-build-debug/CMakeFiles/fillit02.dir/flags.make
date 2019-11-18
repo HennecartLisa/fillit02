@@ -6,5 +6,5 @@ C_FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk 
 
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/lisahennecart/Desktop/fillit02/. -I/Users/lisahennecart/Desktop/fillit02/libft 
+C_INCLUDES = -I/Users/lisahennecart/Desktop/goinfre/fillit02/. -I/Users/lisahennecart/Desktop/goinfre/fillit02/libft 
 

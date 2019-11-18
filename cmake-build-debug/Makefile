@@ -48,10 +48,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/lisahennecart/Desktop/fillit02
+CMAKE_SOURCE_DIR = /Users/lisahennecart/Desktop/goinfre/fillit02
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/lisahennecart/Desktop/fillit02/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/lisahennecart/Desktop/goinfre/fillit02/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lisahennecart/Desktop/fillit02/cmake-build-debug/CMakeFiles /Users/lisahennecart/Desktop/fillit02/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lisahennecart/Desktop/goinfre/fillit02/cmake-build-debug/CMakeFiles /Users/lisahennecart/Desktop/goinfre/fillit02/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lisahennecart/Desktop/fillit02/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/lisahennecart/Desktop/goinfre/fillit02/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,6 +122,33 @@ fillit02: cmake_check_build_system
 fillit02/fast:
 	$(MAKE) -f CMakeFiles/fillit02.dir/build.make CMakeFiles/fillit02.dir/build
 .PHONY : fillit02/fast
+
+check_charachters.o: check_charachters.c.o
+
+.PHONY : check_charachters.o
+
+# target to build an object file
+check_charachters.c.o:
+	$(MAKE) -f CMakeFiles/fillit02.dir/build.make CMakeFiles/fillit02.dir/check_charachters.c.o
+.PHONY : check_charachters.c.o
+
+check_charachters.i: check_charachters.c.i
+
+.PHONY : check_charachters.i
+
+# target to preprocess a source file
+check_charachters.c.i:
+	$(MAKE) -f CMakeFiles/fillit02.dir/build.make CMakeFiles/fillit02.dir/check_charachters.c.i
+.PHONY : check_charachters.c.i
+
+check_charachters.s: check_charachters.c.s
+
+.PHONY : check_charachters.s
+
+# target to generate assembly for a file
+check_charachters.c.s:
+	$(MAKE) -f CMakeFiles/fillit02.dir/build.make CMakeFiles/fillit02.dir/check_charachters.c.s
+.PHONY : check_charachters.c.s
 
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
@@ -1914,6 +1941,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... fillit02"
+	@echo "... check_charachters.o"
+	@echo "... check_charachters.i"
+	@echo "... check_charachters.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"

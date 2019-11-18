@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhenneca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/05 13:32:56 by lhenneca          #+#    #+#             */
-/*   Updated: 2019/11/05 18:59:22 by zszeredi         ###   ########.fr       */
-/*   Updated: 2019/11/05 17:53:34 by lhenneca         ###   ########.fr       */
+/*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
+/*   Updated: 2019/11/15 15:36:43 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +18,34 @@
 # include <sys/uio.h>
 # include <limits.h>
 # include "libft/libft.h"
+/*
+** Global structures
+*/
+
+typedef struct	s_tetra
+{
+    int	tab[4][4];
+}				t_tetra;
 
 int		ft_print(char tetra[4][5]);
 /*
- * read_file.h
+ * read_file.c
  */
-int		read_file(const int fd);
-int		ft_check_nl(char **str, int i);
-int		ft_check_charachters(char **str, int i);
+t_tetra	*read_file(const int fd);
+int		ft_nbt(int number_tetroes, char **str);
+int		ft_m_last_line(char **str, int number_tetroes);
+int		ft_s_last_line(char **str);
+int		check_charachters(char *str);
+int		ft_check_nl(char *str);
+int		ft_check_for_charachter(char *str, int x);
+int		ft_charachter(char *str, int j, int n, char c);
+int		ft_check_connections(char *str);
 
 /*
  * storage.c
  */
 char**		storage(int nb_tetriminoes, int fd);
-int		ft_create_double_array(int x, int y, char **array);
+//int		ft_create_double_array(int x, int y, char **array);
 int		ft_free(char **pt, int nb);
 
 /*

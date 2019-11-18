@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/fillit02.dir/check_charachters.c.o"
   "CMakeFiles/fillit02.dir/libft/ft_atoi.c.o"
   "CMakeFiles/fillit02.dir/libft/ft_bzero.c.o"
   "CMakeFiles/fillit02.dir/libft/ft_create_double_str.c.o"

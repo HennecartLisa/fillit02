@@ -70,6 +70,7 @@ add_executable(fillit02
         libft/ft_toupper.c
         libft/ft_words_count.c
         libft/libft.h
+        check_charachters.c
         fillit.h
         main.c
         read_file.c
