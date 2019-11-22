@@ -6,13 +6,11 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:36:54 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/15 15:04:28 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/11/22 16:13:44 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-//V. 7. Works with all checks and passes the norm..
 
 int		ft_check_connections(char *str)
 {
@@ -80,9 +78,9 @@ int		ft_check_nl(char *str)
 
 int		check_charachters(char *str)
 {
-    int len;
+	int len;
 
-    len = ft_strlen(str);
+	len = ft_strlen(str);
 	if (len < 20)
 		return (-1);
 	if ((ft_check_nl(str) < 0))
