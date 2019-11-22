@@ -1,5 +1,78 @@
 #include "fillit.h"
 
+int     move_up(t_tetra *tetra)
+{
+    int     i;
+    int     j;
+
+    i = 0;
+    while (i < 4)
+    {
+        if (tetra->tab[0][i] == 1)
+            return (0);
+        i++;
+    }
+    i = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            if (i != 3)
+                tetra->tab[i][j] = tetra->tab[i + 1][j];
+            else
+                tetra->tab[i][j] = 0;
+            j++;
+        }
+        i++;
+    }
+    return (1);
+}
+
+int     move_left(t_tetra *tetra)
+{
+    int     i;
+    int     j;
+
+    i = 0;
+    while (i < 4)
+    {
+        if (tetra->tab[i][0] == 1)
+            return (0);
+        i++;
+    }
+    i = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            if (j != 3)
+                tetra->tab[i][j] = tetra->tab[i][j + 1];
+            else
+                tetra->tab[i][j] = 0;
+           j++;
+        }
+        i++;
+    }
+    return (1);
+}
+
+void    move_up_left(t_tetra **t, int nb)
+{
+    int     possible;
+    t_tetra *tetros;
+
+    tetros = *t;
+    while (nb)
+    {
+        possible = 1;
+        while (possible)
+            possible = move_left(tetros) | move_up((tetros));
+        tetros++;
+        nb--;
+    }
+}
 /*
  *  Take index and create a double char array set to NULL and return it
  */
@@ -54,6 +127,7 @@ t_tetra *ft_store_teros(char **tetros, int nb)
         }
         i++;
     }
+    move_up_left(&res, res[0].total_tetros);
     return (res);
 }
 
