@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/22 16:06:10 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/11/26 14:57:55 by lhenneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int		main(int argc, char **argv)
 {
 	int		fd;
 	t_tetra	*tetros;
+	int		*connect;
 
+	connect = ft_memalloc(26 * sizeof(int));
 	if (*argv && argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -36,7 +38,7 @@ int		main(int argc, char **argv)
 			ft_error(1);
 			return (1);
 		}
-		if ((tetros = read_file(fd)) == NULL)
+		if ((tetros = read_file(fd, &connect)) == NULL)
 		{
 			ft_error(2);
 			return (1);

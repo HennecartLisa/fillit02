@@ -6,13 +6,13 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:36:54 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/22 16:13:44 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/11/26 14:51:33 by lhenneca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_check_connections(char *str)
+int		ft_check_connections(char *str, char c)
 {
 	int j;
 	int connections;
@@ -21,11 +21,11 @@ int		ft_check_connections(char *str)
 	j = 0;
 	while (str[j] != '\0')
 	{
-		if (str[j] == '#')
+		if (str[j] == c)
 		{
-			if (str[j + -1] == '#')
+			if (str[j + -1] == c)
 				connections++;
-			if (str[j + -5] == '#')
+			if (str[j + -5] == c)
 				connections++;
 		}
 		j++;
@@ -33,7 +33,7 @@ int		ft_check_connections(char *str)
 	str[j - 1] = '\0';
 	if (connections < 3)
 		return (-1);
-	return (1);
+	return (connections);
 }
 
 int		ft_charachter(char *str, int j, int n, char c)
@@ -43,7 +43,7 @@ int		ft_charachter(char *str, int j, int n, char c)
 	return (n);
 }
 
-int		ft_check_for_charachter(char *str, int x)
+int		ft_check_for_charachter(char *str, int x, int **connect)
 {
 	int j;
 	int counter1;
@@ -64,7 +64,7 @@ int		ft_check_for_charachter(char *str, int x)
 	str[j] = '\0';
 	if (counter1 != 4 || counter2 != 12 || counter3 != x)
 		return (-1);
-	if ((ft_check_connections(str)) < 0)
+	if ((*connect[x] = ft_check_connections(str, '#')) < 0)
 		return (-1);
 	return (1);
 }
@@ -76,7 +76,7 @@ int		ft_check_nl(char *str)
 	return (1);
 }
 
-int		check_charachters(char *str)
+int		check_charachters(char *str, int **connect)
 {
 	int len;
 
@@ -86,10 +86,10 @@ int		check_charachters(char *str)
 	if ((ft_check_nl(str) < 0))
 		return (-1);
 	if (len == 20)
-		if ((ft_check_for_charachter(str, 4)) < 0)
+		if ((ft_check_for_charachter(str, 4, connect)) < 0)
 			return (-1);
 	if (len == 21)
-		if ((ft_check_for_charachter(str, 5)) < 0)
+		if ((ft_check_for_charachter(str, 5, connect)) < 0)
 			return (-1);
 	return (1);
 }
