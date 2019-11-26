@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 			ft_error(1);
 			return (1);
 		}
-		if ((tetros = read_file(fd, &connect)) == NULL)
+		if ((tetros = read_file(fd, connect)) == NULL)
 		{
 			ft_error(2);
 			return (1);

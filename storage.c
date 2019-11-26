@@ -111,7 +111,7 @@ char		**ft_create_double_array(int x, int y)
  *      tab[4][4] fot the tetro and the total number of tetros
  */
 
-t_tetra		*ft_store_teros(char **tetros, int nb, int **connect)
+t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 {
 	t_tetra *res;
 	int		i;
@@ -126,7 +126,7 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int **connect)
 		m = 0;
 		j = 0;
 		res[i].total_tetros = nb - 1;
-		res[i].connections = *connect[i];
+		res[i].connections = connect[i];
 		while (m < 4)
 		{
 			n = 0;
@@ -163,6 +163,8 @@ void		ft_print_tetros(t_tetra *t)
 	m = 0;
 	while (m < t[0].total_tetros)
 	{
+        ft_putnbr(t[m].connections);
+        ft_putchar('\n');
 		i = 0;
 		while (i < 4)
 		{

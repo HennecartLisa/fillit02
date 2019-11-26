@@ -71,7 +71,7 @@ t_tetra	*let_it_go(char *str)
 	return (NULL);
 }
 
-t_tetra	*read_file(const int fd, int **connect)
+t_tetra	*read_file(const int fd, int *connect)
 {
 	int		i;
 	int		ret;
@@ -88,7 +88,7 @@ t_tetra	*read_file(const int fd, int **connect)
 	{
 		buf[ret] = '\0';
 		ft_strcpy(str[i], buf);
-		if ((check_charachters(str[i], connect)) < 1)
+		if ((check_charachters(str[i], &connect[i])) < 1)
 			return (let_it_go(str[i]));
 		number_tetroes++;
 		i++;

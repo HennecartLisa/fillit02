@@ -34,14 +34,14 @@ int				ft_print(char tetra[4][5]);
 /*
  * read_file.c
  */
-t_tetra			*read_file(const int fd, int **connect);
+t_tetra			*read_file(const int fd, int *connect);
 int				ft_nbt(int number_tetroes, char **str);
 int				ft_m_last_line(char **str, int number_tetroes);
 int				ft_s_last_line(char **str);
-int				check_charachters(char *str, int **connect);
+int				check_charachters(char *str, int *connect);
 int				ft_check_nl(char *str);
 t_tetra			*let_it_go(char *str);
-int				ft_check_for_charachter(char *str, int x, int **connect);
+int				ft_check_for_charachter(char *str, int x, int *connect);
 int				ft_charachter(char *str, int j, int n, char c);
 int				ft_check_connections(char *str, char c);
 
@@ -49,7 +49,7 @@ int				ft_check_connections(char *str, char c);
  * storage.c
  */
 char			**ft_create_double_array(int x, int y);
-t_tetra			*ft_store_teros(char **tetros, int nb, int **connect);
+t_tetra			*ft_store_teros(char **tetros, int nb, int *connect);
 void			ft_print_tetros(t_tetra *t);
 
 /*

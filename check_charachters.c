@@ -43,7 +43,7 @@ int		ft_charachter(char *str, int j, int n, char c)
 	return (n);
 }
 
-int		ft_check_for_charachter(char *str, int x, int **connect)
+int		ft_check_for_charachter(char *str, int x, int *connect)
 {
 	int j;
 	int counter1;
@@ -64,7 +64,7 @@ int		ft_check_for_charachter(char *str, int x, int **connect)
 	str[j] = '\0';
 	if (counter1 != 4 || counter2 != 12 || counter3 != x)
 		return (-1);
-	if ((*connect[x] = ft_check_connections(str, '#')) < 0)
+	if ((*connect = ft_check_connections(str, '#')) < 0)
 		return (-1);
 	return (1);
 }
@@ -76,7 +76,7 @@ int		ft_check_nl(char *str)
 	return (1);
 }
 
-int		check_charachters(char *str, int **connect)
+int		check_charachters(char *str, int *connect)
 {
 	int len;
 
