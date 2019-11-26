@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:07:03 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/26 15:04:43 by lhenneca         ###   ########.fr       */
+/*   Updated: 2019/11/26 17:51:04 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_s_last_line(char **str)
 	int i;
 
 	i = 0;
-	j = 19;// change from 20 to 19 for last line
+	j = 19;
 	if (str[i][j] == '\n')
 		return (-1);
 	return (1);
@@ -32,7 +32,7 @@ int		ft_m_last_line(char **str, int number_tetroes)
 	int j;
 	int i;
 
-	j = 19;// changed from 20 to 19 for last line
+	j = 19;
 	i = 0;
 	while ((str[i][j] != '\0') && (number_tetroes >= 1))
 	{
@@ -81,7 +81,7 @@ t_tetra	*read_file(const int fd, int *connect)
 
 	number_tetroes = 0;
 	i = 0;
-	str = ft_create_double_array(27, 21); //put it at 27 so runs into the ft_nb
+	str = ft_create_double_array(27, 21);
 	if ((fd < 0 || fd >= OPEN_MAX) || read(fd, buf, 0) < 0)
 		return (let_it_go(str[i]));
 	while ((ret = read(fd, buf, BUFFER_SIZE)) && number_tetroes <= 26)
