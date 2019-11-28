@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/26 19:07:17 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/11/28 19:31:05 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
  * it takes the t_tetra array and print them all on screen
  */
 
-void		ft_print_tetros(t_tetra *t)
+void		ft_print_tetros(t_table *t)
 {
 	int	m;
 	int	i;
@@ -162,9 +162,9 @@ void		ft_print_tetros(t_tetra *t)
 
 	ft_putchar('\n');
 	m = 0;
-	while (m < t[0].total_tetroes)
+	while (m < t[0].nb_tetroes)
 	{
-        ft_putnbr(t[m].connections);
+       // ft_putnbr(t[m].connections);
         ft_putchar('\n');
 		i = 0;
 		while (i < 4)
@@ -172,7 +172,7 @@ void		ft_print_tetros(t_tetra *t)
 			j = 0;
 			while (j < 4)
 			{
-				ft_putnbr(t[m].tab[i][j]);
+				ft_putnbr(t[m].square[i][j]);
 				j++;
 			}
 			ft_putchar('\n');

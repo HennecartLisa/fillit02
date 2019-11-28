@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/26 17:48:46 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/11/28 19:31:18 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		main(int argc, char **argv)
 			ft_error(2);
 			return (1);
 		}
-		ft_print_tetros(tetros);
+	//	ft_print_tetros(tetros);
 		//	tetrim = storage(4, fd);
 		//	else
 		//		ft_error(3);
