@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 15:48:13 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/01 16:32:40 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/01 17:45:41 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@ char	**place(t_table *s2, t_tetra *s, int nb)
 		ft_putchar('k');
 		while(b < s2->nb_tetroes)
 		{
-			if (counter == 4)
-			{
-				ft_putstr("no need to go further already found all 4 chars");
-				s->tab[i][j] = '\0';
-				s2->square[a][b] = '\0';
-				ft_print_tetros(s2);
-			}
 			ft_putstr("i\n");
 			if (s[nb].tab[i][j] == 1)
 			{
@@ -66,19 +59,26 @@ char	**place(t_table *s2, t_tetra *s, int nb)
 
 				ft_putstr(" converted\n");
 			}
-			else
+			else //if (s[nb].tab[i][j] == 0)
 			{
 				ft_putstr(" this one I am  not converting\n");
 				j++;
 				b++;
 				ft_putstr(" instead I go to the next one\n");
 			}
+			if (counter == 4)
+			{
+				ft_putstr("no need to go further already found all 4 chars");
+				s->tab[i][j] = '\0';
+				s2->square[a][b] = '\0';
+				ft_print_tetros(s2);
+			}
 
 		}	
 		if (b == s2->nb_tetroes)
 		{
 			ft_putstr(" what to do now?\n");
-			if(s[nb].tab[i][j++] != 1 && s[nb].tab[i][j + 2] != 1)
+			if(s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1)
 			{
 
 				ft_putstr(" there is no more 1, so i can just go to next line\n");
@@ -100,21 +100,30 @@ char	**place(t_table *s2, t_tetra *s, int nb)
 	}
 	if (a == s2->nb_tetroes)
 	{
-		ft_putstr(" I am at the last line line, last position of my square\n");
-		if(s[nb].tab[i++][j] != 1 && s[nb].tab[i][j++] != 1)
+		ft_putstr(" I am at the last line lineof my squre\n");
+		ft_putnbr(i);
+		ft_putnbr(j);
+		i++;
+		if(s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1 && s[nb].tab[i][j + 3] != 1)
 		{
+
 			ft_putnbr(i);
 			ft_putnbr(j);
 			s[nb].tab[i][j] = '\0';
 			s2->square[a][b] = '\0';
 			ft_putstr("ok copied first tetro\n");
 			ft_print_tetros(s2);
+
+
 		}
 		else
-		{
+		{	
 			ft_putstr(" shit no place, need more space\n");
 			delete_table(s2);
+			ft_putstr("here we go again");
+			ft_putnbr(size);
 			ft_allocate(s, ++size);
+
 		}
 	}	
 	return(s2->square);
