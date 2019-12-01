@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/28 19:31:05 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/01 16:17:33 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,8 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 		i++;
 	}
 	move_up_left(&res, res[0].total_tetroes);
-	ft_allocate(res); //calling creating_table here, perhaps not best place.
+	ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
+//	ft_print_tetros(res);
 	return (res);
 }
 
@@ -157,28 +158,28 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 void		ft_print_tetros(t_table *t)
 {
 	int	m;
-	int	i;
+//	int	i;
 	int	j;
 
 	ft_putchar('\n');
 	m = 0;
-	while (m < t[0].nb_tetroes)
+	while (m <= t->nb_tetroes)
 	{
        // ft_putnbr(t[m].connections);
         ft_putchar('\n');
-		i = 0;
-		while (i < 4)
+	//	i = 0;
+		while (m <= 4)
 		{
 			j = 0;
 			while (j < 4)
 			{
-				ft_putnbr(t[m].square[i][j]);
+				ft_putnbr(t->square[m][j]);
 				j++;
 			}
 			ft_putchar('\n');
-			i++;
+			m++;
 		}
 		ft_putchar('\n');
-		m++;
+		//m++;
 	}
 }
