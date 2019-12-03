@@ -33,7 +33,7 @@ typedef	struct	s_tetra
 typedef struct	s_table
 {
 	char		**square;
-	int			nb_tetroes;
+	int			table_size;
 	int			left_connections;
 }				t_table;
 int				ft_print(char tetra[4][5]);
@@ -61,7 +61,7 @@ void			ft_print_tetros(t_table *t);
 /*
  * placing.c
  */
-char		**place(t_table *s2, t_tetra *s, int nb);
+int		place(t_table *s2, t_tetra *s, int nb);
 void		delete_table (t_table *s2);
 t_table			*ft_allocate(t_tetra *s, int size);
 int				min_table(int i);

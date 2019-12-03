@@ -162,10 +162,10 @@ void		ft_print_tetros(t_table *t)
 
     m = 0;
     ft_putchar('\n');
-    while (m < t->nb_tetroes)
+    while (m < t->table_size)
     {
         j = 0;
-        while (j < t->nb_tetroes)
+        while (j < t->table_size)
         {
             ft_putchar(t->square[m][j]);
             j++;

@@ -16,7 +16,7 @@
 void	delete_table(t_table *s2)
 {
 	int i = 0;
-	while (i < s2->nb_tetroes)
+	while (i < s2->table_size)
 	{
 		ft_strdel(&s2->square[i]);
 		i++;
@@ -27,41 +27,40 @@ void	delete_table(t_table *s2)
 
 }
 
-char	**place(t_table *s2, t_tetra *s, int nb)
+int	place(t_table *s2, t_tetra *s, int nb)
 {
 	int i = 0;
 	int j = 0;
 	int a = 0;
 	int b = 0;
 	int  counter = 0;
-	int c = 65;
 	static int size = 0;
-	while (a < s2->nb_tetroes)
+	while (a < s2->table_size)
 	{
-		while(b < s2->nb_tetroes)
+		while(b < s2->table_size)
 		{
 			if (s[nb].tab[i][j] == 1)
 			{
-				s2->square[a][b] = c;
+				s2->square[a][b] = 65 + nb;
 				counter++;
 				j++;
 				b++;
 			}
 			else //if (s[nb].tab[i][j] == 0)
 			{
+                s2->square[a][b] = '.';
 				j++;
 				b++;
 			}
 			if (counter == 4)
 			{
-				s->tab[i][j] = '\0';
-				s2->square[a][b] = '\0';
 				ft_print_tetros(s2);
+				return (1);
 			}
 		}
-		if (b == s2->nb_tetroes)
+		if (b == s2->table_size)
 		{
-			if(s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1)
+			if(j == 4 || (s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1))
 			{
 				i++;
 				a++;
@@ -72,24 +71,24 @@ char	**place(t_table *s2, t_tetra *s, int nb)
 			{
 				delete_table(s2);
 				ft_allocate(s, ++size);
+				return (0);
 			}
 		}
 	}
-	if (a == s2->nb_tetroes)
+	if (a == s2->table_size)
 	{
 		i++;
 		if(s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1 && s[nb].tab[i][j + 3] != 1)
 		{
-
-			s[nb].tab[i][j] = '\0';
-			s2->square[a][b] = '\0';
 			ft_print_tetros(s2);
+            return (1);
 		}
 		else
 		{	
 			delete_table(s2);
 			ft_allocate(s, ++size);
+			return (0);
 		}
 	}	
-	return(s2->square);
+	return(0);
 }

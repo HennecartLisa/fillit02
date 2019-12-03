@@ -64,15 +64,15 @@ t_table	*ft_allocate(t_tetra *s, int size)
 		free(table);
 		table = NULL;
 	}
-	table->nb_tetroes = min_table(s->total_tetroes + size);
-	if (!((*table).square = ft_memalloc((table->nb_tetroes * sizeof(char *)))))
+	table->table_size = min_table(s->total_tetroes + size);
+	if (!((*table).square = ft_memalloc((table->table_size * sizeof(char *)))))
 		return (ltg(*(*table).square));
-	while (i <= table->nb_tetroes)
+	while (i <= table->table_size)
 	{
-		if (!(table->square[i] = ft_memalloc((table->nb_tetroes * sizeof(char)))))
+		if (!(table->square[i] = ft_memalloc((table->table_size * sizeof(char)))))
 			return (ltg(*(table->square)));
 		else
-		    dot(table->square[i], table->nb_tetroes);
+		    dot(table->square[i], table->table_size);
 		i++;
 	}
 	place(table, s, 0);
