@@ -173,7 +173,7 @@ void		ft_print_tetros(t_table *t)
 			j = 0;
 			while (j < 4)
 			{
-				ft_putnbr(t->square[m][j]);
+				ft_putchar(t->square[m][j]);
 				j++;
 			}
 			ft_putchar('\n');
