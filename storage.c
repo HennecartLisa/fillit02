@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*                                                                            */
+/*  here                                                                          */
 /*                                                        :::      ::::::::   */
 /*   storage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -63,7 +63,7 @@ int     move_left(t_tetra *tetra)
                 tetra->tab[i][j] = tetra->tab[i][j + 1];
             else
                 tetra->tab[i][j] = 0;
-           j++;
+            j++;
         }
         i++;
     }
@@ -92,17 +92,17 @@ void    move_up_left(t_tetra **t, int nb)
 
 char		**ft_create_double_array(int x, int y)
 {
-	char	**str_d;
-	int		i;
+    char	**str_d;
+    int		i;
 
-	str_d = ft_memalloc((x * sizeof(char*)));
-	i = 0;
-	while (i < x)
-	{
-		str_d[i] = ft_memalloc(y * sizeof(char));
-		i++;
-	}
-	return (str_d);
+    str_d = ft_memalloc((x * sizeof(char*)));
+    i = 0;
+    while (i < x)
+    {
+        str_d[i] = ft_memalloc(y * sizeof(char));
+        i++;
+    }
+    return (str_d);
 }
 
 /*
@@ -113,41 +113,41 @@ char		**ft_create_double_array(int x, int y)
 
 t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 {
-	t_tetra *res;
-	int		i;
-	int		j;
-	int		m;
-	int		n;
+    t_tetra *res;
+    int		i;
+    int		j;
+    int		m;
+    int		n;
 
-	res = ft_memalloc(nb * sizeof(t_tetra));
-	i = 0;
-	while (i < nb - 1)
-	{
-		m = 0;
-		j = 0;
-		res[i].total_tetroes = nb - 1;
-		res[i].connections = connect[i];
-		while (m < 4)
-		{
-			n = 0;
-			while (n < 4)
-			{
-				if (tetros[i][j] == '.')
-					res[i].tab[m][n] = 0;
-				else
-					res[i].tab[m][n] = 1;
-				j++;
-				n++;
-			}
-			j++;
-			m++;
-		}
-		i++;
-	}
-	move_up_left(&res, res[0].total_tetroes);
-	ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
+    res = ft_memalloc(nb * sizeof(t_tetra));
+    i = 0;
+    while (i < nb - 1)
+    {
+        m = 0;
+        j = 0;
+        res[i].total_tetroes = nb - 1;
+        res[i].connections = connect[i];
+        while (m < 4)
+        {
+            n = 0;
+            while (n < 4)
+            {
+                if (tetros[i][j] == '.')
+                    res[i].tab[m][n] = 0;
+                else
+                    res[i].tab[m][n] = 1;
+                j++;
+                n++;
+            }
+            j++;
+            m++;
+        }
+        i++;
+    }
+    move_up_left(&res, res[0].total_tetroes);
+    ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
 //	ft_print_tetros(res);
-	return (res);
+    return (res);
 }
 
 /*
@@ -157,29 +157,21 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 
 void		ft_print_tetros(t_table *t)
 {
-	int	m;
-//	int	i;
-	int	j;
+    int	m;
+    int	j;
 
-	ft_putchar('\n');
-	m = 0;
-	while (m <= t->nb_tetroes)
-	{
-       // ft_putnbr(t[m].connections);
+    m = 0;
+    ft_putchar('\n');
+    while (m < t->nb_tetroes)
+    {
+        j = 0;
+        while (j < t->nb_tetroes)
+        {
+            ft_putchar(t->square[m][j]);
+            j++;
+        }
         ft_putchar('\n');
-	//	i = 0;
-		while (m <= 4)
-		{
-			j = 0;
-			while (j < 4)
-			{
-				ft_putchar(t->square[m][j]);
-				j++;
-			}
-			ft_putchar('\n');
-			m++;
-		}
-		ft_putchar('\n');
-		//m++;
-	}
+        m++;
+    }
+    ft_putchar('\n');
 }
