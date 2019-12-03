@@ -31,6 +31,50 @@ void	delete_table(t_table *s2)
 
 char	**place(t_table *s2, t_tetra *s, int nb)
 {
+<<<<<<< HEAD
+    int i = 0;
+    int j = 0;
+    int a = 0;
+    int	b = 0;
+    int n = 0;
+    char c = 65;
+    int counter = 0;
+    //	ft_putchar('\n');*/
+    ft_putstr("what");
+    while (s[n].tab[a][b])
+    {
+        while (counter < nb && counter < nb)
+        {
+            while (b < 4)
+            {
+                ft_putstr(" ");
+                if(s[n].tab[a][b] == 1)
+                    s2->square[i][j] = c;
+                else
+                    s2->square[i][j] = '.';
+                b++;
+                j++;
+                ft_putstr("going");
+            }
+            a++;
+            i++;
+            j = 0;
+            b = 0;
+
+            ft_putstr("on");
+            if (a == 4 && s2->square != '\0')
+            {
+                n++;
+                c++;
+                place(s2, s, nb);
+            }
+        }
+    }
+    //	ft_memcpy(s2->square[i], s->tab[a],20);
+    //ft_putnbr(nb);
+    ft_print_tetros(s2);
+    return(s2->square);
+=======
 	int i = 0;
 	int j = 0;
 	int a = 0;
@@ -123,6 +167,7 @@ char	**place(t_table *s2, t_tetra *s, int nb)
 			ft_putstr("here we go again");
 			ft_putnbr(size);
 			ft_allocate(s, ++size);
+>>>>>>> da2dc3d8de4203103f6d233f9ffdc62be5d8b854
 
 		}
 	}	
