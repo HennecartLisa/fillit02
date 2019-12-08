@@ -75,6 +75,6 @@ t_table	*ft_allocate(t_tetra *s, int size)
 		    dot(table->square[i], table->table_size);
 		i++;
 	}
-	place(table, s, 0);
+	//place(table, s, 0);
 	return (table);
 }

@@ -1,5 +1,5 @@
 /* ************************************************************************** */
-/*  here                                                                          */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   storage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
@@ -127,6 +127,7 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
         j = 0;
         res[i].total_tetroes = nb - 1;
         res[i].connections = connect[i];
+        res[i].letter = 'A' + i;
         while (m < 4)
         {
             n = 0;

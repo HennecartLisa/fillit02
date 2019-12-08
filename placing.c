@@ -41,7 +41,7 @@ int	place(t_table *s2, t_tetra *s, int nb)
 		{
 			if (s[nb].tab[i][j] == 1)
 			{
-				s2->square[a][b] = 65 + nb;
+				s2->square[a][b] = s->letter;
 				counter++;
 				j++;
 				b++;

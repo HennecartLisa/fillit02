@@ -28,6 +28,8 @@ int		main(int argc, char **argv)
 	int		fd;
 	t_tetra	*tetros;
 	int		*connect;
+	t_table *s;
+	int size;
 
 	connect = ft_memalloc(26 * sizeof(int));
 	if (*argv && argc == 2)
@@ -43,6 +45,17 @@ int		main(int argc, char **argv)
 			ft_error(2);
 			return (1);
 		}
+		else
+        {
+		    size = 0;
+            s = ft_allocate(tetros,size);
+            while (solver(s,tetros))
+            {
+                if (s)
+                    delete_table(s);
+                s = ft_allocate(tetros, size++);
+            }
+        }
 	//	ft_print_tetros(tetros);
 		//	tetrim = storage(4, fd);
 		//	else

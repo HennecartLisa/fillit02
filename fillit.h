@@ -27,6 +27,7 @@ typedef	struct	s_tetra
 {
 	int	tab[4][4];
 	int	total_tetroes;
+    int	letter;
 	int	connections;
 }				t_tetra;
 
@@ -70,4 +71,6 @@ t_table			*ltg(char *str);
 /*
  *
  */
+int solver(t_table *s2, t_tetra *s);
+int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
 #endif
