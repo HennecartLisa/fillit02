@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 15:48:13 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/01 17:45:41 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/12 15:30:23 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,68 +27,88 @@ void	delete_table(t_table *s2)
 
 }
 
-int	place(t_table *s2, t_tetra *s, int nb)
+int	place(t_table *s2, t_tetra *s, int nb) 
 {
 	int i = 0;
 	int j = 0;
-	int a = 0;
-	int b = 0;
+	int x = 0;
+	int y = 0;
 	int  counter = 0;
-	static int size = 0;
-	while (a < s2->table_size)
+	ft_putstr("starting\n");
+	while (x < s2->table_size)
 	{
-		while(b < s2->table_size)
+		while(y < s2->table_size)
 		{
 			if (s[nb].tab[i][j] == 1)
 			{
-				s2->square[a][b] = s->letter;
-				counter++;
-				j++;
-				b++;
+				ft_putstr("charachter!\n");
+
+				if (s2->square[x][y] == '.')
+				{	
+					ft_putstr("place!\n");
+					s2->square[x][y] = s->letter;
+					counter++;
+					j++;
+					y++;
+				}
+				else
+				{
+					ft_putstr("already something here\n");
+					return (0); // condition to move away //
+			}
 			}
 			else //if (s[nb].tab[i][j] == 0)
 			{
-                s2->square[a][b] = '.';
+				ft_putstr("no charachter\n");
 				j++;
-				b++;
+				y++;
 			}
 			if (counter == 4)
 			{
-				ft_print_tetros(s2);
+				ft_putstr("starting\n");
+				ft_print_table(s2);
 				return (1);
 			}
 		}
-		if (b == s2->table_size)
+		if (y == s2->table_size)
 		{
+			ft_putstr("last position in line\n");
 			if(j == 4 || (s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1))
-			{
+			{	
+				ft_putstr("ok, jumping line\n");
 				i++;
-				a++;
+				x++;
 				j = 0;
-				b = 0;
+				y = 0;
 			}
 			else
 			{
-				delete_table(s2);
-				ft_allocate(s, ++size);
-				return (0);
+				ft_putstr("not enough space\n");
+//delete_table(s2);
+				//ft_allocate(s, ++size);
+				return (-1);
 			}
 		}
 	}
-	if (a == s2->table_size)
+	if (x == s2->table_size)
 	{
-		i++;
+		ft_putstr("last line\n");
+i++;
 		if(s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1 && s[nb].tab[i][j + 3] != 1)
 		{
-			ft_print_tetros(s2);
+			ft_putstr("no more chars\n");
+
+			ft_print_table(s2);
             return (1);
 		}
 		else
 		{	
-			delete_table(s2);
-			ft_allocate(s, ++size);
-			return (0);
+			ft_putstr("not enough place\n");
+
+			//delete_table(s2);
+			//ft_allocate(s, ++size);
+			return (-1);
 		}
 	}	
-	return(0);
+	return(1);
 }

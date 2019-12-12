@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/28 19:31:18 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/12 11:11:13 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ int		main(int argc, char **argv)
 		else
         {
 		    size = 0;
-            s = ft_allocate(tetros,size);
-            while (solver(s,tetros))
+          	s = ft_allocate(tetros, size);
+	 	/*	while (solver(s,tetros))
             {
                 if (s)
                     delete_table(s);
                 s = ft_allocate(tetros, size++);
-            }
+
+            }*/
         }
 	//	ft_print_tetros(tetros);
 		//	tetrim = storage(4, fd);

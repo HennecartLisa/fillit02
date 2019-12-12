@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/01 16:14:51 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/12 14:04:49 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef	struct	s_tetra
 {
 	int	tab[4][4];
 	int	total_tetroes;
-    int	letter;
+	int	letter;
 	int	connections;
 }				t_tetra;
 
@@ -57,7 +57,8 @@ int				ft_check_connections(char *str, char c);
  */
 char			**ft_create_double_array(int x, int y);
 t_tetra			*ft_store_teros(char **tetros, int nb, int *connect);
-void			ft_print_tetros(t_table *t);
+void			ft_print_table(t_table *t);
+void			ft_print_tetros(t_tetra *t);
 
 /*
  * placing.c
@@ -69,8 +70,11 @@ int				min_table(int i);
 int				ft_sqrt(int nb);
 t_table			*ltg(char *str);
 /*
- *
+ * backtracking.
  */
 int solver(t_table *s2, t_tetra *s);
 int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
+int verif (t_tetra *s, t_table *s2, int x, int y, int nb);
+void		delete_table (t_table *s2);
+
 #endif
