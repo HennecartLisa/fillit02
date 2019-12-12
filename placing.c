@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 15:48:13 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/12 15:30:23 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/12 15:34:14 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ int	place(t_table *s2, t_tetra *s, int nb)
 			{
 				ft_putstr("charachter!\n");
 
-				if (s2->square[x][y] == '.')
+				if (s2->square[x][y] != '.')
 				{	
+					ft_putstr("already something here\n");
+					return (0); 
+				}	
+				else
+				{
 					ft_putstr("place!\n");
 					s2->square[x][y] = s->letter;
 					counter++;
 					j++;
 					y++;
-				}
-				else
-				{
-					ft_putstr("already something here\n");
-					return (0); // condition to move away //
 			}
 			}
 			else //if (s[nb].tab[i][j] == 0)
