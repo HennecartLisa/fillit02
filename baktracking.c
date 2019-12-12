@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/12 15:12:11 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/12 15:46:35 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,20 @@ int		tetri_del(t_tetra *s, t_table *s2 ,int x ,int y)
 	}
 	return (1);
 }
+void	delete_table(t_table *s2)
+{
+	int i;
+	i = 0;
+
+	while (i < s2->table_size)
+	{
+		ft_strdel(&s2->square[i]);
+		i++;
+	}
+	ft_strdel(s2->square);
+	free(s2);
+	s2 = NULL;
+}
 /*
  * char **map == t_table *s2
  * t_tetriminos *tetri == t_tetra *s
@@ -147,7 +161,7 @@ int		solver(t_table *s2, t_tetra *s)
 		nb++;
 		ft_putnbr(nb);
 		{
-			if (end  == -1)//verif(s, s2, x, y, 0)))
+			if (end  == -1)//not enough space //verif(s, s2, x, y, 0)))
 			{	
 				ft_putstr("end is -1\n");	
 				delete_table(s2);
@@ -161,12 +175,12 @@ int		solver(t_table *s2, t_tetra *s)
 			if (end == 1)
 			{
 				ft_putstr("end is 1\n");	
-				if (nb < s->total_tetroes)
+				if (nb < s->total_tetroes)//if I still have tetroes
 				{
 					ft_putstr("i have to go to next tetro\n");	
 					end = place(s2, s, nb);
 				}
-				else
+				else //for last line
 				{
 					ft_putstr("end of file, I am done");
 					s2->square[x][y] = '\0';
