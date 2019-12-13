@@ -6,12 +6,32 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 15:48:13 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/12 16:27:58 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/13 13:27:34 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
+
+int	chara_find(t_table *s2, t_tetra *s, int i, int j)
+{
+	int x = 0;
+	int y = 0;
+	ft_putstr("\ntrying to insert\n");
+
+	if(s2->square[x + i][y + j + 1] != s->letter || s2->square[x + i + 1][y + j] != s->letter)// && (s2->square[x + i][y +  j + 1] != '\0' || s2->square[x + i + 1][y + j] != '\0'))
+	{		
+		ft_putstr("inserted\n");
+		s2->square[x + i][y + j] = s->letter;
+
+	}
+	else
+	{	
+		ft_putstr("position not free");
+		return (-1);
+	}
+	return (1);
+}
 
 int	place(t_table *s2, t_tetra *s, int nb) 
 {
@@ -29,15 +49,21 @@ int	place(t_table *s2, t_tetra *s, int nb)
 			{
 				ft_putstr("charachter!\n");
 
-				if (s2->square[x + i][y + j] != '.')
+				if (s2->square[x + i][y + j] != '.' )
 				{	
-					ft_putstr("already something here\n");
-					return (0); 
+					ft_putstr("already something here\n");//to work out
+					ft_putnbr(j);
+					if((chara_find(s2, s, i, j++)) < 1)
+					{
+						ft_putnbr(j);
+						return (0); 
+					}
 				}	
 				else
 				{
 					ft_putstr("place!\n");
-					s2->square[x + i][y + j] = s->letter;
+					chara_find(s2, s, i, j);
+					//					s2->square[x + i][y + j] = s->letter;
 					counter++;
 					j++;
 				}
@@ -49,7 +75,7 @@ int	place(t_table *s2, t_tetra *s, int nb)
 			}
 			if (counter == 4)
 			{
-				ft_putstr("starting\n");
+				ft_putstr("4 chars!\n");
 				ft_print_table(s2);
 				return (1);
 			}

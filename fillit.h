@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/12 15:51:22 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/13 10:32:59 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_table			*ft_allocate(t_tetra *s, int size);
 int				min_table(int i);
 int				ft_sqrt(int nb);
 t_table			*ltg(char *str);
+int			chara_find(t_table *s2, t_tetra *s, int i,int j);
 /*
  * backtracking.
  */
