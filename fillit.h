@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/13 10:32:59 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/14 16:06:10 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ void			ft_print_tetros(t_tetra *t);
 /*
  * placing.c
  */
-int		place(t_table *s2, t_tetra *s, int nb);
+int		place(t_table *s2, t_tetra *s, int nb, int l);
 void		ft_increment(int a, int b);
 t_table			*ft_allocate(t_tetra *s, int size);
 int				min_table(int i);
 int				ft_sqrt(int nb);
 t_table			*ltg(char *str);
-int			chara_find(t_table *s2, t_tetra *s, int i,int j);
+int			chara_find(t_table *s2, int i,int j, int l, int counter);
+int			move(int j);
 /*
  * backtracking.
  */
@@ -78,5 +79,6 @@ int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
 void		delete_table (t_table *s2);
 int verif (t_tetra *s, t_table *s2, int x, int y, int nb);
 void		delete_table (t_table *s2);
+int			move_tab(int tab[4][4], int move);
 
 #endif
