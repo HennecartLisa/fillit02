@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/15 10:31:57 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/15 17:29:40 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		solver(t_table *s2, t_tetra *s)
 	//	{
 	end = place(s2, s, nb, s->letter);
 	ft_putnbr(end);
+//	ft_print_table(s2);
 	ft_putstr("i am back to solver\n");	
 
 	nb++;
