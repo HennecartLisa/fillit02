@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/14 16:06:10 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/14 16:45:19 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int				ft_sqrt(int nb);
 t_table			*ltg(char *str);
 int			chara_find(t_table *s2, int i,int j, int l, int counter);
 int			move(int j);
-/*
+char 		**temporary(t_table *s2);
+/*i
  * backtracking.
  */
 int solver(t_table *s2, t_tetra *s);
