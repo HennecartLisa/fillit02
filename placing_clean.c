@@ -7,6 +7,15 @@ int        save_number(int j)
 	n = j;
 	return (n);
 }
+char	**temporary(char **table)
+{
+	char **tmp;
+
+	tmp = (char **)malloc(sizeof(table));
+	tmp = table;
+
+	return (tmp);
+}
 int    chara_find(t_table *s2, int i, int j, int l, int counter)
 {
 	int x = 0;
@@ -44,7 +53,7 @@ int    place(t_table *s2, t_tetra *s, int nb, int l)
 				{    
 					j++;
 					if (j)
-						n =    save_number(j);
+						n = save_number(j);
 				}
 				if (s2->square[x + i][y + j] == '.')
 				{
@@ -84,8 +93,7 @@ int    place(t_table *s2, t_tetra *s, int nb, int l)
 			}
 			if (counter == 4)
 			{
-				tmp = (char **)malloc(sizeof(s2->square));
-				tmp = s2->square;
+				tmp = temporary(s2->square);
 				ft_print_table(s2);
 				return (1);
 			}
@@ -106,8 +114,7 @@ int    place(t_table *s2, t_tetra *s, int nb, int l)
 		i++;
 		if(s[nb].tab[i][j] != 1 && s[nb].tab[i][j++] != 1 && s[nb].tab[i][j + 2] != 1 && s[nb].tab[i][j + 3] != 1)
 		{
-			tmp = (char **)malloc(sizeof(s2->square));
-			tmp = s2->square;
+			tmp = temporary(s2->square);
 			ft_print_table(s2);
 			return (1);
 		}
