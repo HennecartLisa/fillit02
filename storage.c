@@ -178,42 +178,33 @@ int **save_cordis(t_tetra *s)//to save the cordinates of the chars, but I am not
 	int nb = 0;
 	int counter = 0;
 	s->cordis =	ft_create_double__int_array(4, 2);
-	ft_putstr("here");
-	while (nb < s[0].total_tetroes)
-	{
-		while ( i <= 3)
-		{
-			while ( j <= 3)
-			{
-				ft_putstr("still");
-				if (s[nb].tab[i][j] == 0 || s[nb].tab[i][j] == '\n') 
-					j++;
-				else//if ((s[nb].tab[i][j] == 1 || s[nb].tab[i][j] == '\n'))
-				{
-					ft_putstr("insert");
-					s[nb].cordis[a][b] = i;
-					printf("%d\n", s[nb].cordis[a][b]);
-					b++;
-					s[nb].cordis[a][b] = j;
-					printf("%d\n", s[nb].cordis[a][b]);	
-					counter++;
-					j++;
-				}	
-			}
-			i++;
-			j = 0;
-				
-			if (counter == 4)
-				{	
-					i = 0;
-					j = 0;
-					counter = 0;
-					nb++;
-					ft_putstr("next");
-				}
-			}
-		}
-	return(s[nb].cordis);
+    ft_putstr("2");
+    while (nb < s[0].total_tetroes) {
+        while (i <= 3) {
+            j = 0;
+            while (j <= 3) {
+                if (s[nb].tab[i][j] == 0 || s[nb].tab[i][j] == '\n')
+                    j++;
+                else//if ((s[nb].tab[i][j] == 1 || s[nb].tab[i][j] == '\n'))
+                {
+                    s[nb].cordis[a][b] = i;
+                    //printf("%d\n", s[nb].cordis[a][b]);
+                    b++;
+                    s[nb].cordis[a][b] = j;
+                    //printf("%d\n", s[nb].cordis[a][b]);
+                    counter++;
+                    j++;
+                }
+                ft_putstr("2");
+            }
+            ft_putstr("2");
+            i++;
+        }
+        nb++;
+        i = 0;
+    }
+    ft_putstr("2");
+	return(s[nb - 1].cordis);
 }
 
 //Printing functions
