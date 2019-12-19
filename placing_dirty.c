@@ -151,7 +151,7 @@ int	check_if_possible(t_table *s2, int x, t_tetra *s, int nb)
 		}
 	}
 	return (1);
-}*/
+}
 
 int    place(t_table *s2, t_tetra *s, int nb, int l) 
 {
