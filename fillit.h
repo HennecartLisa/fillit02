@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 12:42:59 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/15 17:49:05 by zszeredi         ###   ########.fr       */
+/*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
+/*   Updated: 2019/12/19 17:03:17 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef	struct	s_tetra
 	int	total_tetroes;
 	int	letter;
 	int	connections;
+	int	**cordis;//[4][2];
 }				t_tetra;
 
 typedef struct	s_table
@@ -37,6 +38,7 @@ typedef struct	s_table
 	int			table_size;
 	int			left_connections;
 }				t_table;
+
 int				ft_print(char tetra[4][5]);
 /*
  * read_file.c
@@ -56,31 +58,41 @@ int				ft_check_connections(char *str, char c);
  * storage.c
  */
 char			**ft_create_double_array(int x, int y);
+int				**ft_create_double_int_array(int x, int y);
 t_tetra			*ft_store_teros(char **tetros, int nb, int *connect);
+int	**save_cordis( t_tetra *s);
+
 void			ft_print_table(t_table *t);
 void			ft_print_tetros(t_tetra *t);
 
 /*
- * placing.c
+ * create_table.c
  */
-int		place(t_table *s2, t_tetra *s, int nb, int l);
-void		ft_increment(int a, int b);
 t_table			*ft_allocate(t_tetra *s, int size);
 int				min_table(int i);
 int				ft_sqrt(int nb);
 t_table			*ltg(char *str);
-int			chara_find(t_table *s2, int x,int y, int l, int counter);
-int			*move(int j);
-char 		**temporary(char **table);
-t_tetra			*move_table(t_tetra *s, int nb, int n);
-char		**clear_tetro(char **table, int l, int i, int j);
+
 /*
- * backtracking.
+ * backtracking.c
  */
 int solver(t_table *s2, t_tetra *s);
-int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
+//int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
 void		delete_table (t_table *s2);
-int verif (t_tetra *s, t_table *s2, int x, int y, int nb);
+//int verif (t_tetra *s, t_table *s2, int x, int y, int nb);
+void main_insert(t_table *s2, t_tetra *s,  int size);
+int main_if_possible(t_table *s2, t_tetra *s, int size);
+/*
+ * placing.c
+ */
+char 		**temporary(char **table);
+char		**clear_tetro(char **table, int l, int i, int j);
+int			chara_find(t_table *s2, int x,int y, int l, int counter);
+int			total_chars(int counter);
+void			last(int x, int y, int j, int l, int nb, t_table *s2, t_tetra *s);
+int 		insert_tetro(int x, int i, int nb, int l, t_table *s2, t_tetra *s);
+int			check_if_possible(t_table *s2, int x, t_tetra *s, int nb);
+int		place(t_table *s2, t_tetra *s, int nb);//, int l);
 void		delete_table (t_table *s2);
 
 

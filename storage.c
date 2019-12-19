@@ -6,11 +6,12 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/12 16:34:00 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/19 17:01:40 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int     move_up(t_tetra *tetra)
 {
@@ -89,6 +90,20 @@ void    move_up_left(t_tetra **t, int nb)
 /*
  *  Take index and create a double char array set to NULL and return it
  */
+int		**ft_create_double__int_array(int x, int y)
+{
+	int	**str_d;
+	int		i;
+
+	str_d = ft_memalloc((x * sizeof(int*)));
+	i = 0;
+	while (i < x)
+	{
+		str_d[i] = ft_memalloc(y * sizeof(int));
+		i++;
+	}
+	return (str_d);
+}
 
 char		**ft_create_double_array(int x, int y)
 {
@@ -146,15 +161,62 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 		i++;
 	}
 	move_up_left(&res, res[0].total_tetroes);
-	//ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
-	//	ft_print_tetros(res);
+	ft_putstr("ok");
+	ft_print_tetros(res);
+	save_cordis(res);
+	//	ft_print_cordis(res);
+	//	ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
 	return (res);
 }
 
-/*
- * this one is only to check if we stored the tetros, it will be remove for the moulinette
- * it takes the t_tetra array and print them all on screen
- */
+int **save_cordis(t_tetra *s)//to save the cordinates of the chars, but I am not sure if I am saving it in theright structure
+{
+	int i = 0;
+	int j = 0;
+	int a = 0;
+	int b = 0;
+	int nb = 0;
+	int counter = 0;
+	s->cordis =	ft_create_double__int_array(4, 2);
+	ft_putstr("here");
+	while (nb < s[0].total_tetroes)
+	{
+		while ( i <= 3)
+		{
+			while ( j <= 3)
+			{
+				ft_putstr("still");
+				if (s[nb].tab[i][j] == 0 || s[nb].tab[i][j] == '\n') 
+					j++;
+				else//if ((s[nb].tab[i][j] == 1 || s[nb].tab[i][j] == '\n'))
+				{
+					ft_putstr("insert");
+					s[nb].cordis[a][b] = i;
+					printf("%d\n", s[nb].cordis[a][b]);
+					b++;
+					s[nb].cordis[a][b] = j;
+					printf("%d\n", s[nb].cordis[a][b]);	
+					counter++;
+					j++;
+				}	
+			}
+			i++;
+			j = 0;
+				
+			if (counter == 4)
+				{	
+					i = 0;
+					j = 0;
+					counter = 0;
+					nb++;
+					ft_putstr("next");
+				}
+			}
+		}
+	return(s[nb].cordis);
+}
+
+//Printing functions
 
 void		ft_print_table(t_table *t)
 {
@@ -204,4 +266,30 @@ void        ft_print_tetros(t_tetra *t)
 			ft_putchar('\n');
 			m++;
 		}
+}
+
+void        ft_print_cordis(t_tetra *s)
+{
+	int    m = 0;
+	int    a;
+	int    b;
+	ft_putchar('\n');
+	while (m < s[0].total_tetroes)
+	{
+		a  = 0;
+		while (a < 4)
+		{
+			b = 0;
+			while ( b < 2)
+			{
+				ft_putnbr(s[m].cordis[a][b]);
+				b++;
+				//printf("%i\n", s->cordis[a][b]);
+			}
+			ft_putchar('\n');
+			a++;
+		}	
+		ft_putchar ('\n');
+		m++;
+	}
 }

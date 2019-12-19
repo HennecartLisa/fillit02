@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/15 17:49:03 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/19 17:03:04 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,8 @@ int		solver(t_table *s2, t_tetra *s)
 	y = 0;
 	//	while (y <= 4) // s2->table_size)
 	//	{
-	end = place(s2, s, nb, s->letter);
+	end = place(s2, s, nb);//i s->letter);
 	ft_putnbr(end);
-//	ft_print_table(s2);
 	ft_putstr("i am back to solver\n");	
 
 	nb++;
@@ -124,12 +123,13 @@ int		solver(t_table *s2, t_tetra *s)
 			{
 				ft_putstr("i have to go to next tetro\n");	
 				s->letter++;
-				end = place(s2, s, nb, s->letter);
+				end = place(s2, s, nb);//, s->letter);
 			}
 			else //for last line
 			{
 				ft_putstr("end of file, I am done");
 				s2->square[x][y] = '\0';
+				ft_print_table(s2);
 				return (1);
 			}
 		}

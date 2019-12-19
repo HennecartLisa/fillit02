@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/13 10:05:52 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/19 13:41:22 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int		main(int argc, char **argv)
 	int		fd;
 	t_tetra	*tetros;
 	int		*connect;
-	t_table *s;
+//	t_table *s;
 	int size;
+
 
 	connect = ft_memalloc(26 * sizeof(int));
 	if (*argv && argc == 2)
@@ -48,7 +49,11 @@ int		main(int argc, char **argv)
 		else
         {
 		    size = 0;
-          	s = ft_allocate(tetros, size);
+			return (0);
+}
+          //	save_cordis(tetros);
+		//	s = ft_allocate(tetros, size);
+		//	main_insert(s, tetros, size);
 	 	/*	while (solver(s,tetros))
             {
                 if (s)
@@ -61,6 +66,5 @@ int		main(int argc, char **argv)
 		//	tetrim = storage(4, fd);
 		//	else
 		//		ft_error(3);
-	}
 	return (0);
 }

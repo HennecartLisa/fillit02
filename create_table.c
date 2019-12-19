@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:49:23 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/12 16:34:02 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/18 18:36:17 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_table	*ft_allocate(t_tetra *s, int size)
 //	ft_print_tetros(s);
 //	ft_print_table(table);
 	solver(table, s);
+//	main_if_possible(table, s, size);
 	//place(table, s, 0);
 	return (table);
 }
