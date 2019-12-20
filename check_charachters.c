@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:36:54 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/11/26 17:51:01 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/20 17:43:12 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int		ft_check_connections(char *str, char c)
 	{
 		if (str[j] == c)
 		{
-			if (str[j + -1] == c)
+			if (j > 0 && (str[j + -1] == c && str[j + -1] != '\0'))
 				connections++;
-			if (str[j + -5] == c)
+			if (j > 4 && (str[j + -5] == c))
 				connections++;
 		}
 		j++;
@@ -49,16 +49,19 @@ int		ft_check_for_charachter(char *str, int x, int *connect)
 	int counter1;
 	int counter2;
 	int counter3;
+	int tmp;
 
 	counter1 = 0;
 	counter2 = 0;
 	counter3 = 0;
 	j = 0;
+	tmp = 0;
 	while (str[j] != '\0')
 	{
 		counter1 = ft_charachter(str, j, counter1, '#');
 		counter2 = ft_charachter(str, j, counter2, '.');
 		counter3 = ft_charachter(str, j, counter3, '\n');
+		printf("%d %c", tmp++, str[j]);
 		j++;
 	}
 	str[j] = '\0';

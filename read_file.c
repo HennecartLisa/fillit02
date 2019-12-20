@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:07:03 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/18 13:08:16 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/20 17:43:09 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ t_tetra	*read_file(const int fd, int *connect)
 	while ((ret = read(fd, buf, BUFFER_SIZE)) && number_tetroes <= 26)
 	{
 		buf[ret] = '\0';
-		ft_strcpy(str[i], buf);
+		str[i] = ft_strdup(buf);
+		//ft_strcpy(str[i], buf);
+		//printf("str = %s" , str[i]);
 		if ((check_charachters(str[i], &connect[i])) < 1)
 			return (let_it_go(str[i]));
 		number_tetroes++;

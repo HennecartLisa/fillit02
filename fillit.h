@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/19 17:20:14 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/20 17:43:14 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,26 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+//TO DELETE !!!
+#include <stdio.h>
+
 /*
  ** Global structures
  */
 
+typedef struct	s_coords
+{
+	short x;
+	short y;
+}				t_coords;
+
 typedef	struct	s_tetra
 {
-	int	tab[4][4];
-	int	total_tetroes;
-	int	letter;
-	int	connections;
-	int	**cordis;//[4][2];
+	int			tab[4][4];
+	int			total_tetroes;
+	int			letter;
+	int			connections;
+	t_coords	*cordis;
 }				t_tetra;
 
 typedef struct	s_table
@@ -60,7 +69,7 @@ int				ft_check_connections(char *str, char c);
 char			**ft_create_double_array(int x, int y);
 int				**ft_create_double_int_array(int x, int y);
 t_tetra			*ft_store_teros(char **tetros, int nb, int *connect);
-int	**save_cordis( t_tetra *s);
+void			save_cordis(t_tetra **s, int nb);
 
 void			ft_print_table(t_table *t);
 void			ft_print_tetros(t_tetra *t);

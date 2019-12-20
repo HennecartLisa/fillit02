@@ -6,12 +6,11 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/19 17:01:40 by zszeredi         ###   ########.fr       */
+/*   Updated: 2019/12/20 17:43:07 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 int     move_up(t_tetra *tetra)
 {
@@ -90,19 +89,17 @@ void    move_up_left(t_tetra **t, int nb)
 /*
  *  Take index and create a double char array set to NULL and return it
  */
-int		**ft_create_double__int_array(int x, int y)
+t_coords		*ft_create_cordis_array()
 {
-	int	**str_d;
-	int		i;
-
-	str_d = ft_memalloc((x * sizeof(int*)));
-	i = 0;
-	while (i < x)
-	{
-		str_d[i] = ft_memalloc(y * sizeof(int));
-		i++;
-	}
-	return (str_d);
+	t_coords	*coords;
+	if (!(coords = ft_memalloc(4 * sizeof(t_coords))))
+		return NULL;
+	coords[0].x = 0;
+	coords[1].x = 0;
+	coords[2].x = 0;
+	coords[3].x = 0;
+	
+	return (coords);
 }
 
 char		**ft_create_double_array(int x, int y)
@@ -134,7 +131,7 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	int		m;
 	int		n;
 
-	res = ft_memalloc(nb * sizeof(t_tetra));
+	res = ft_memalloc((nb - 1) * sizeof(t_tetra));
 	i = 0;
 	while (i < nb - 1)
 	{
@@ -163,48 +160,52 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	move_up_left(&res, res[0].total_tetroes);
 	ft_putstr("ok");
 	ft_print_tetros(res);
-	save_cordis(res);
+	save_cordis(&res, nb);
 	//	ft_print_cordis(res);
 	//	ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
 	return (res);
 }
 
-int **save_cordis(t_tetra *s)//to save the cordinates of the chars, but I am not sure if I am saving it in theright structure
+void	save_cordis(t_tetra **s, int nb)//to save the cordinates of the chars, but I am not sure if I am saving it in theright structure
 {
-	int i = 0;
-	int j = 0;
-	int a = 0;
-	int b = 0;
-	int nb = 0;
-	int counter = 0;
-	s->cordis =	ft_create_double__int_array(4, 2);
-    ft_putstr("2");
-    while (nb < s[0].total_tetroes) {
-        while (i <= 3) {
-            j = 0;
-            while (j <= 3) {
-                if (s[nb].tab[i][j] == 0 || s[nb].tab[i][j] == '\n')
-                    j++;
-                else//if ((s[nb].tab[i][j] == 1 || s[nb].tab[i][j] == '\n'))
-                {
-                    s[nb].cordis[a][b] = i;
-                    //printf("%d\n", s[nb].cordis[a][b]);
-                    b++;
-                    s[nb].cordis[a][b] = j;
-                    //printf("%d\n", s[nb].cordis[a][b]);
-                    counter++;
-                    j++;
-                }
-                ft_putstr("2");
-            }
-            ft_putstr("2");
-            i++;
-        }
-        nb++;
-        i = 0;
-    }
-    ft_putstr("2");
-	return(s[nb - 1].cordis);
+	int i;
+	int j;
+	int m;
+	int counter;
+
+	m = 0;
+	ft_putnbr(nb);
+	while (m <= nb - 1)//- 1)// s[0].tab[i][j] != '\0') 
+	{
+		j  = 0;
+		i = 0;
+		counter = 0;
+		//fprintf(stderr, "nb: %d\n", nb);
+		printf("[m == %d]\n", m);
+		//printf("letter: %c\n", s[2]->letter);
+		if (!(s[m]->cordis = ft_create_cordis_array()))
+			return ;
+		printf("[m == %d]\n", m);
+		//printf("[x == %d] [y == %d]\n", s[m]->cordis[counter].x, s[m]->cordis[counter].y);
+		while  (i < 4) 
+		{
+			while (j < 4) 
+			{	
+				if (s[m]->tab[i][j] == 1)
+				{
+					s[m]->cordis[counter].x = j;
+					s[m]->cordis[counter].y = i;
+					printf("(%d, %d)\n", s[m]->cordis[counter].x, s[m]->cordis[counter].y);
+					counter++;
+				}
+				j++;
+			}
+			i++;
+			j = 0;
+		}
+		fprintf(stderr, "coucou %d\n", m); 	
+		m++;
+	}
 }
 
 //Printing functions
@@ -237,7 +238,6 @@ void        ft_print_tetros(t_tetra *t)
 
 	ft_putchar('\n');
 	m = 0;
-	while (m < t[0].total_tetroes)
 		while (m < t[0].total_tetroes)
 		{
 			ft_putnbr(t[m].connections);
@@ -255,32 +255,10 @@ void        ft_print_tetros(t_tetra *t)
 				i++;
 			}
 			ft_putchar('\n');
+			/*for (int i = 0; i < 4; i++) {
+				ft_putnbr(t[m].cordis[i].x);
+				ft_putnbr(t[m].cordis[i].y);
+			}*/
 			m++;
 		}
-}
-
-void        ft_print_cordis(t_tetra *s)
-{
-	int    m = 0;
-	int    a;
-	int    b;
-	ft_putchar('\n');
-	while (m < s[0].total_tetroes)
-	{
-		a  = 0;
-		while (a < 4)
-		{
-			b = 0;
-			while ( b < 2)
-			{
-				ft_putnbr(s[m].cordis[a][b]);
-				b++;
-				//printf("%i\n", s->cordis[a][b]);
-			}
-			ft_putchar('\n');
-			a++;
-		}	
-		ft_putchar ('\n');
-		m++;
-	}
 }
