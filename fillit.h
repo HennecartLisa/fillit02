@@ -38,7 +38,7 @@ typedef	struct	s_tetra
 	int			total_tetroes;
 	int			letter;
 	int			connections;
-	t_coords	*cordis;
+	t_coords	cordis[4];
 }				t_tetra;
 
 typedef struct	s_table
