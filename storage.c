@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/20 17:43:07 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/10 21:00:07 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,10 @@ void    move_up_left(t_tetra **t, int nb)
 t_coords		*ft_create_cordis_array()
 {
 	t_coords	*coords;
+	printf("ok avant memmaloc\n");
 	if (!(coords = ft_memalloc(4 * sizeof(t_coords))))
 		return NULL;
-	coords[0].x = 0;
-	coords[1].x = 0;
-	coords[2].x = 0;
-	coords[3].x = 0;
-	
+	printf("after memmlloc\n");
 	return (coords);
 }
 
@@ -123,6 +120,25 @@ char		**ft_create_double_array(int x, int y)
  *      tab[4][4] fot the tetro and the total number of tetros
  */
 
+void print_value(t_tetra *tetra, int n){
+	int count = 0;
+	int i = 0;
+	int j = 0;
+	while (count < n - 1){
+		i = 0;
+		j = 0;
+		while (i < 4){
+			j = 0;
+			while (j < 4){
+				printf("tetra[%d].tab[%d][%d] = %d\n", count, i, j, tetra[count].tab[i][j]);
+				j++;
+			}
+			i++;
+		}
+		count++;
+		printf("\n\n");
+	}
+}
 t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 {
 	t_tetra *res;
@@ -131,7 +147,7 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	int		m;
 	int		n;
 
-	res = ft_memalloc((nb - 1) * sizeof(t_tetra));
+	res = malloc((nb - 1) * sizeof(res));
 	i = 0;
 	while (i < nb - 1)
 	{
@@ -159,8 +175,10 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	}
 	move_up_left(&res, res[0].total_tetroes);
 	ft_putstr("ok");
-	ft_print_tetros(res);
+	print_value(res, nb);
+	//ft_print_tetros(res);
 	save_cordis(&res, nb);
+	print_value(res, nb);
 	//	ft_print_cordis(res);
 	//	ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
 	return (res);
@@ -172,38 +190,29 @@ void	save_cordis(t_tetra **s, int nb)//to save the cordinates of the chars, but 
 	int j;
 	int m;
 	int counter;
-
+	//t_tetra *xd = *s;
 	m = 0;
-	ft_putnbr(nb);
-	while (m <= nb - 1)//- 1)// s[0].tab[i][j] != '\0') 
+	(void)s;
+	while (m < nb - 1)//- 1)// s[0].tab[i][j] != '\0')
 	{
 		j  = 0;
 		i = 0;
 		counter = 0;
-		//fprintf(stderr, "nb: %d\n", nb);
-		printf("[m == %d]\n", m);
-		//printf("letter: %c\n", s[2]->letter);
-		if (!(s[m]->cordis = ft_create_cordis_array()))
-			return ;
-		printf("[m == %d]\n", m);
-		//printf("[x == %d] [y == %d]\n", s[m]->cordis[counter].x, s[m]->cordis[counter].y);
-		while  (i < 4) 
+		while  (i < 4)
 		{
-			while (j < 4) 
-			{	
-				if (s[m]->tab[i][j] == 1)
+			j = 0;
+			while (j < 4)
+			{
+				if (s[m].tab[i][j] == 1)
 				{
-					s[m]->cordis[counter].x = j;
-					s[m]->cordis[counter].y = i;
-					printf("(%d, %d)\n", s[m]->cordis[counter].x, s[m]->cordis[counter].y);
+					s[m].cordis[counter].x = j;
+					s[m].cordis[counter].y = i;
 					counter++;
 				}
 				j++;
 			}
 			i++;
-			j = 0;
 		}
-		fprintf(stderr, "coucou %d\n", m); 	
 		m++;
 	}
 }
@@ -240,21 +249,18 @@ void        ft_print_tetros(t_tetra *t)
 	m = 0;
 		while (m < t[0].total_tetroes)
 		{
-			ft_putnbr(t[m].connections);
-			ft_putchar('\n');
 			i = 0;
 			while (i < 4)
 			{
 				j = 0;
 				while (j < 4)
 				{
-					ft_putnbr(t[m].tab[i][j]);
+					printf("s[%d].tab[%d][%d] = %d\n", m, i, j, t[m].tab[i][j]);
 					j++;
 				}
-				ft_putchar('\n');
 				i++;
 			}
-			ft_putchar('\n');
+			printf("\n\n\n");
 			/*for (int i = 0; i < 4; i++) {
 				ft_putnbr(t[m].cordis[i].x);
 				ft_putnbr(t[m].cordis[i].y);
