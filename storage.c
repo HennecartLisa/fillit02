@@ -6,16 +6,16 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/10 21:00:07 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/11 13:05:33 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int     move_up(t_tetra *tetra)
+int			move_up(t_tetra *tetra)
 {
-	int     i;
-	int     j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 4)
@@ -41,10 +41,10 @@ int     move_up(t_tetra *tetra)
 	return (1);
 }
 
-int     move_left(t_tetra *tetra)
+int			move_left(t_tetra *tetra)
 {
-	int     i;
-	int     j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < 4)
@@ -70,9 +70,9 @@ int     move_left(t_tetra *tetra)
 	return (1);
 }
 
-void    move_up_left(t_tetra **t, int nb)
+void		move_up_left(t_tetra **t, int nb)
 {
-	int     possible;
+	int		possible;
 	t_tetra *tetros;
 
 	tetros = *t;
@@ -89,15 +89,6 @@ void    move_up_left(t_tetra **t, int nb)
 /*
  *  Take index and create a double char array set to NULL and return it
  */
-t_coords		*ft_create_cordis_array()
-{
-	t_coords	*coords;
-	printf("ok avant memmaloc\n");
-	if (!(coords = ft_memalloc(4 * sizeof(t_coords))))
-		return NULL;
-	printf("after memmlloc\n");
-	return (coords);
-}
 
 char		**ft_create_double_array(int x, int y)
 {
@@ -120,25 +111,6 @@ char		**ft_create_double_array(int x, int y)
  *      tab[4][4] fot the tetro and the total number of tetros
  */
 
-void print_value(t_tetra *tetra, int n){
-	int count = 0;
-	int i = 0;
-	int j = 0;
-	while (count < n - 1){
-		i = 0;
-		j = 0;
-		while (i < 4){
-			j = 0;
-			while (j < 4){
-				printf("tetra[%d].tab[%d][%d] = %d\n", count, i, j, tetra[count].tab[i][j]);
-				j++;
-			}
-			i++;
-		}
-		count++;
-		printf("\n\n");
-	}
-}
 t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 {
 	t_tetra *res;
@@ -147,7 +119,7 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	int		m;
 	int		n;
 
-	res = malloc((nb - 1) * sizeof(res));
+	res = malloc((nb) * sizeof(t_tetra));
 	i = 0;
 	while (i < nb - 1)
 	{
@@ -174,39 +146,37 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 		i++;
 	}
 	move_up_left(&res, res[0].total_tetroes);
-	ft_putstr("ok");
-	print_value(res, nb);
-	//ft_print_tetros(res);
+	ft_print_tetros(res);
 	save_cordis(&res, nb);
-	print_value(res, nb);
-	//	ft_print_cordis(res);
 	//	ft_allocate(res, 0); //calling creating_table here, perhaps not best place.
 	return (res);
 }
 
-void	save_cordis(t_tetra **s, int nb)//to save the cordinates of the chars, but I am not sure if I am saving it in theright structure
+void		save_cordis(t_tetra **s, int nb)// saves coordinates. Could make faster with while counter < 4 so it only runs until it finds all the 1s.
 {
-	int i;
-	int j;
-	int m;
-	int counter;
-	//t_tetra *xd = *s;
+	int		i;
+	int		j;
+	int		m;
+	int		counter;
+	t_tetra	*xd;
+
+	xd = *s;
 	m = 0;
-	(void)s;
-	while (m < nb - 1)//- 1)// s[0].tab[i][j] != '\0')
+	while (m < nb - 1)
 	{
-		j  = 0;
+		j = 0;
 		i = 0;
 		counter = 0;
-		while  (i < 4)
+		while (i < 4)
 		{
 			j = 0;
 			while (j < 4)
 			{
-				if (s[m].tab[i][j] == 1)
+				if (xd[m].tab[i][j] == 1)
 				{
-					s[m].cordis[counter].x = j;
-					s[m].cordis[counter].y = i;
+					xd[m].cordis[counter].x = j;
+					xd[m].cordis[counter].y = i;
+					printf("xd[%d].cordis[%d].[%d][%d]\n", m, counter, j, i);
 					counter++;
 				}
 				j++;
@@ -239,32 +209,30 @@ void		ft_print_table(t_table *t)
 	}
 	ft_putchar('\n');
 }
-void        ft_print_tetros(t_tetra *t)
+
+void		ft_print_tetros(t_tetra *t)
 {
-	int    m;
-	int    i;
-	int    j;
+	int m;
+	int i;
+	int j;
 
 	ft_putchar('\n');
 	m = 0;
-		while (m < t[0].total_tetroes)
+	while (m < t->total_tetroes)
+	{
+		i = 0;
+		while (i < 4)
 		{
-			i = 0;
-			while (i < 4)
+			j = 0;
+			while (j < 4)
 			{
-				j = 0;
-				while (j < 4)
-				{
-					printf("s[%d].tab[%d][%d] = %d\n", m, i, j, t[m].tab[i][j]);
-					j++;
-				}
-				i++;
+				ft_putnbr(t[m].tab[i][j]);
+				j++;
 			}
-			printf("\n\n\n");
-			/*for (int i = 0; i < 4; i++) {
-				ft_putnbr(t[m].cordis[i].x);
-				ft_putnbr(t[m].cordis[i].y);
-			}*/
-			m++;
+			ft_putchar('\n');
+			i++;
 		}
+		ft_putchar('\n');
+		m++;
+	}
 }
