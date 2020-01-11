@@ -56,28 +56,7 @@ int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter)
 	int b;
 	int c;
 	counter = 0;
-	c = 0;
-ft_putstr("okkk");	
-	while (counter < 4)
-	{
-		ft_putstr("still here");
-		a = s[nb].cordis[counter].x;
-		b = s[nb].cordis[counter].y;
-		ft_putstr("sup");
-		a = s[nb].cordis[counter].x;
-		printf("b = %d a = %d ", a, b);
-		s2->square[b][a] = letter;
-		counter++;
-	}
-	return (0);
-}
-
-int		ft_if_fits(t_table *s2, int a, int b)
-{
-	ft_putstr("here");
-	if (a >=  s2->table_size || b >= s2->table_size)
-		return (-1);
-		return (1);
+	c = 0
 }
 
 int		place(t_table *s2, t_tetra *s, int nb)

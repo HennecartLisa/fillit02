@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:49:23 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 19:20:38 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/11 19:41:40 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ int		ft_sqrt(int nb)
 	while (nb > 1 && square <= nb / 2)
 	{
 		if (square * square >= nb)
-		{
 			return (square);
-		}
 		square++;
 	}
 	return (2);
@@ -66,23 +64,20 @@ t_table	*ft_allocate(t_tetra *s, int size)
 		table = NULL;
 	}
 	table->table_size = min_table(s->total_tetroes + size);
-	ft_putstr("min size table is:");
-	ft_putnbr(table->table_size);
 	if (!(table->square = ft_memalloc(table->table_size * sizeof(char *))))
 		return (ltg(*(*table).square));
 	while (i < table->table_size)
 	{
 		if (!(table->square[i] = ft_memalloc(table->table_size * sizeof(char))))
 			return (ltg(*(table->square)));
-				else
-				{
-				dot(table->square[i], table->table_size);
-				dot(*table->square, table->table_size);
-				}
-				i++;
-					}
-	//	ft_print_tetros(s);
-	ft_print_table(table);
+		else
+		{
+			dot(table->square[i], table->table_size);
+			dot(*table->square, table->table_size);
+		}
+		i++;
+	}
+	printf("min table size is: %d\n", table->table_size);
 	solver(table, s);
 	return (table);
 }

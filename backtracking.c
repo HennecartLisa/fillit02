@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 18:34:42 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/11 19:41:36 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int		solver(t_table *s2, t_tetra *s)
 	static int size = 0;
 	nb = 0;
 	x = 0;
-	//		ft_print_tetros(s);
-	//	ft_print_table(s2);
+	ft_print_tetros(s);
+	ft_print_table(s2);
 	//if (!s) // condition for the end of the table
 	//	return (0);
 	//	while (x <= s2->table_size)
@@ -99,7 +99,7 @@ int		solver(t_table *s2, t_tetra *s)
 	//	{
 	end = place(s2, s, nb);//, s->letter);
 	ft_putnbr(end);
-//	ft_print_table(s2);
+	ft_print_table(s2);
 	ft_putstr("i am back to solver\n");	
 
 	nb++;
