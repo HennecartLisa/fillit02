@@ -6,12 +6,11 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/19 17:19:45 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/11 18:34:42 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 /*int     verif(t_tetra *s, t_table *s2, int x, int y, int placeit)
 {
@@ -130,6 +129,7 @@ int		solver(t_table *s2, t_tetra *s)
 			{
 				ft_putstr("end of file, I am done");
 				s2->square[x][y] = '\0';
+				ft_print_table(s2);	
 				return (1);
 			}
 		}
@@ -145,8 +145,8 @@ int		solver(t_table *s2, t_tetra *s)
 		//	}
 		//	y++;
 		//	ft_print_tetros(s);
-		//	ft_print_table(s2);	
 }
+
 //	}
 //x++	
 return (1);

@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2019/12/20 17:43:16 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/11 13:22:04 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		main(int argc, char **argv)
 	int		fd;
 	t_tetra	*tetros;
 	int		*connect;
-//	t_table *s;
+	t_table *s;
 	int size;
 
 
@@ -47,24 +47,21 @@ int		main(int argc, char **argv)
 			return (1);
 		}
 		else
-        {
-		    size = 0;
+		{
+			size = 0;
+			s = ft_allocate(tetros, size);
 			return (0);
-}
-          //	save_cordis(tetros);
-		//	s = ft_allocate(tetros, size);
-		//	main_insert(s, tetros, size);
-	 	/*	while (solver(s,tetros))
-            {
-                if (s)
-                    delete_table(s);
-                s = ft_allocate(tetros, size++);
+		}
+	}
+		// {
+		//   if (s)
+		//     delete_table(s);
+		// s = ft_allocate(tetros, size++);
 
-            }*/
-        }
+		//  }*/
 	//	ft_print_tetros(tetros);
-		//	tetrim = storage(4, fd);
-		//	else
-		//		ft_error(3);
+	//	tetrim = storage(4, fd);
+	//	else
+	//		ft_error(3);
 	return (0);
 }
