@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:36:54 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 16:08:32 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/12 12:22:54 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_check_connections(char *str, char c)
 	str[j - 1] = '\0';
 	if (connections < 3)
 		return (-1);
-	return (connections);
+	return (connections * 2);
 }
 
 int		ft_charachter(char *str, int j, int n, char c)
