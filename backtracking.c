@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 19:41:36 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/12 11:06:48 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int		solver(t_table *s2, t_tetra *s)
 			else //for last line
 			{
 				ft_putstr("end of file, I am done");
-				s2->square[x][y] = '\0';
 				ft_print_table(s2);	
 				return (1);
 			}
