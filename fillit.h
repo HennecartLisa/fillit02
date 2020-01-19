@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/19 18:22:17 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:45:58 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,18 @@ t_table			*ltg(char *str);
 int solver(t_table *s2, t_tetra *s);
 //int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
 void		delete_table (t_table *s2);
-//int verif (t_tetra *s, t_table *s2, int x, int y, int nb);
-void main_insert(t_table *s2, t_tetra *s,  int size);
-int main_if_possible(t_table *s2, t_tetra *s, int size);
-/*
- * placing.c
- */
-char 		**temporary(char **table);
-char		**clear_tetro(char **table, int l, int i, int j);
-int			chara_find(t_table *s2, int x,int y, int l, int counter);
-int			total_chars(int counter);
-void			last(int x, int y, int j, int l, int nb, t_table *s2, t_tetra *s);
-int 		insert_tetro(int x, int i, int nb, int l, t_table *s2, t_tetra *s);
-int			check_if_possible(t_table *s2, int x, t_tetra *s, int nb);
-int		place(t_table *s2, t_tetra *s, int nb);//, int l);
-void		delete_table (t_table *s2);
 
 /*
  * placing.c
+ */
+char 		**tempo(t_table *s2);
+int			ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2);
+int			ft_compare(t_table *s2, t_tetra *s, int nb);
+int			ft_if_fits(t_table *s2, t_tetra tab);
+int			place(t_table *s2, t_tetra *s, int nb);
+
+/*
+ * printing.c
  */
 
 void			ft_print_table(t_table *t);

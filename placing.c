@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/19 20:09:46 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/19 20:45:56 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,11 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 	char **tmp;
 
 	if ((ft_if_fits(s2, s[nb])) < 0)
+	{
+		ft_putstr(":(");
 		return (-1);
-	if (nb == 0)
+	}
+		if (nb == 0)
 	{
 		if ((ft_letter(s2, s, nb, s->letter, 0, 0)) == 0)//letter might has to be incremented elswhere
 			tmp = tempo(s2);
