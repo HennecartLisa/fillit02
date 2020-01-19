@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/19 16:34:22 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/19 19:39:33 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		ft_compare(t_table *s2, t_tetra *s, int nb)
 	int i;
 	int j;
 	int add2;
-	int  tmp[4][2];
+//	int  tmp[4][2];
 	//	a = 0;
 	//	b = 0;
 	add = 0;
@@ -96,51 +96,62 @@ int		ft_compare(t_table *s2, t_tetra *s, int nb)
 	printf("nb  is  %d \n", nb);
 	while (counter < 4)
 	{
-		a = s[nb].cordis[counter].x;
+
+			a = s[nb].cordis[counter].x;
 		if ( b == 0)			
 			b = s[nb].cordis[counter].y;
 
 		ft_putnbr(1);
-		if ( b <= s2->table_size)
+		if ( b + add2  <= s2->table_size)
 		{
-			if ( a  + add < s2->table_size)
+			if( a  + add < s2->table_size)
 			{
+				
+				b = s[nb].cordis[counter].y;
+				printf("cordis[%d][%d]\n", s[nb].cordis[counter].y, s[nb].cordis[counter].x);
 				printf("square[%d + %d][%d + %d]\n", b, add2, a, add);
 				if (a == 0 && b == 0 && s2->square[b][a] == '.' && s2->square[0][1] != '.' && s2->square[1][0] != '.')
 				{
 					ft_putstr("standalone .");
 					add++;
 				}
-				if (s2->square[b + add2][a + add] != '.')
+			/*	if (s2->square[b + add2][a + add] != '.')
 				{
 					ft_putstr("no dot!");	
 					add++;
-				}
+					printf("%d\n", add + a);
+				}*/
 				if (s2->square[b + add2][a + add] == '.')
 				{
 					ft_putstr("dot");	
-					tmp[j][i] = b + add2;
-					printf("tmp[j = %d]",tmp[j][i]);
-					i++;
-					tmp[j][i] = a + add;
-					printf("[i =%d]\n",tmp[j][i]);
+					//tmp[j][i] = b + add2;
+					//printf("tmp[j = %d]",tmp[j][i]);
+					//i++;
+					//tmp[j][i] = a + add;
+					//printf("[i =%d]\n",tmp[j][i]);
 					counter++;
+					printf("b = %d\n", a);
 				}
-				printf("\nadd = %d\n", add);
+				else
+					add++;
+				//	printf("\nadd = %d\n", add);
 			}
 			else
 			{
 				ft_putstr("jumping line");
-				a = s[nb].cordis[counter].x;
-				b = s[nb].cordis[counter].y;
 				add2++;
 				counter = 0;
-				printf("\nadd2 = %d\n", add2);
+		//		b = s[nb].cordis[counter].y;
+				//printf("\nadd2 = %d\n", add2);
+				a = s[nb].cordis[counter].x;
 				add = 0;
 			}
 		}
 		else
+		{	
+			ft_putstr("too much");
 			return(-1);
+		}
 	}
 	printf("add is  %d \n", add);
 	printf("add2 is  %d \n", add2);
