@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/12 20:48:09 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/19 16:34:22 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,151 +25,38 @@
   while (s2->square[a][++b] != '.')
   m++;
   return (m);
-  }
+  }*/
 
-  int		ft_compare(t_table *s2, t_tetra *s, int nb)
-  {
-  int counter;
-  int a;
-  int b;
-  int	m;
-
-  a = 0;
-  b = 0;
-  counter = 0;
-  while (counter <= 4)
-  {
-  while ((s2->square[a][b] != '\0') || (a < s2->table_size && y < s2->table_size))
-  {
-  if(s2->square[a][b] == 0)  
-  {
-
-  }
-  */
-
-int		remaining_dots(t_table *s2, int nb_tetros)
+char **tempo(t_table *s2)
 {
-	int r_d;
-	int	i;
-	int j;
+	char **tmp;
+	int i;
 
-	r_d= 0;
 	i = 0;
-	j = 0;
-	while (s2->square[i][j] != '\0')
+	tmp = ft_create_double_array(s2->table_size + 1, s2->table_size + 1);
+	while (i < s2->table_size)
 	{
-		while ( i < s2->table_size)
-		{
-			j = 0;
-			while ( j < s2->table_size)
-			{
-				if (s2->square[i][j] == '.')
-				{
-					r_d++;
-					j++;
-				}
-				else
-					j++;
-			}
-			i++;	
-		}
-		break;
+		tmp[i] = ft_strdup(s2->square[i]);
+		i++;
 	}
-	printf("r_d is %d\n", r_d);
-	return(r_d - (nb_tetros * 4));
+	return(tmp);
 }
 
-int		dots_needed(t_tetra *s, int nb_tetros)
-{
-	int d_n;
-
-	d_n = (s->total_tetroes - nb_tetros) * 4;
-	printf("d_n is %d\n", d_n);
-	return(d_n);
-}
-
-int		remaining_connections(t_table *s2)
+char	*let_tmp(char **str)
 {
 	int i;
-	int j;
-	int r_c;
-	//	char c;
 
 	i = 0;
-	j = 0;
-	r_c = 0;
-	//	c = '.';
-	ft_putnbr(0);
-	while (s2->square[i][j] != '\0')
-	{
-		while (i < s2->table_size)
-		{
-			ft_putnbr(1);
-			j = 0;
-			while(j < s2->table_size)
-			{
-				ft_putnbr(2);
-				printf("j = %d\n", j);
-				if(s2->square[i][j] == '.')
-				{	
-					ft_putstr("found dot\n");
-					if ((i > 0  && s2->square[i - 1][j] == '.') || s2->square[i + 1][j]== '.')	
-					{
-						ft_putstr("above and below");
-						r_c++;
-						printf("r_c beabove = %d\n", r_c);
-					}
-					ft_putstr("here");
-					if (j > 0 && (s2->square[i][j - 1] == '.' || s2->square[i][j + 1] == '.'))					{
-						ft_putstr("on the side\n");
-						r_c++;
-						printf("r_c on side = %d\n", r_c);
-					}
-					j++;
-					ft_putstr("next");
-				}
-				else
-					j++;
-			}
-			ft_putstr("new line\n");
-			i++;
-			ft_putnbr(7);
-		}
-		break;
-		ft_putnbr(8);
-	}
-	printf("r_c is %d\n", r_c);
-	return (r_c * 2);
+	free(&str[i]);
+	//	while( str[i] != '\0')		
+	//	{
+	//		free(str[i]);
+	//		i++;
+	//	}
+	//	free(str);
+	return(NULL);
 }
-
-int		all_connections (t_tetra *s)
-{
-	int a_c;
-	int nb;
-	nb = 0;
-	a_c = 0;
-	while(nb < s->total_tetroes)
-	{
-		a_c = s[nb].connections + a_c;
-		nb++;
-	}
-	return (a_c);
-}
-
-
-int 	calc(t_table *s2, t_tetra *s, int nb_tetros)
-{
-	nb_tetros = 0;
-	//	if (dots_needed(s, nb_tetros) > remaining_dots(s2, nb_tetros))
-	//		return (-1);
-	ft_putstr("\nhere\n");
-	if (all_connections(s) > remaining_connections(s2))
-		return (-1);
-
-	ft_putstr("done");
-	return (1);
-}
-int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter)
+int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2)
 {
 	int counter;
 	int a;
@@ -182,10 +69,85 @@ int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter)
 	{
 		a = s[nb].cordis[counter].x;
 		b = s[nb].cordis[counter].y;
-		s2->square[b][a] = letter;
+		s2->square[b + add2][a + add] = letter;
 		counter++;
 	}
+	ft_print_table(s2);
 	return (0);
+}
+
+int		ft_compare(t_table *s2, t_tetra *s, int nb)
+{
+	int counter;
+	int a;
+	int b;
+	int add;
+	int i;
+	int j;
+	int add2;
+	int  tmp[4][2];
+	//	a = 0;
+	//	b = 0;
+	add = 0;
+	counter = 0;
+	i = 0;
+	j = 0;
+	add2 = 0;
+	printf("nb  is  %d \n", nb);
+	while (counter < 4)
+	{
+		a = s[nb].cordis[counter].x;
+		if ( b == 0)			
+			b = s[nb].cordis[counter].y;
+
+		ft_putnbr(1);
+		if ( b <= s2->table_size)
+		{
+			if ( a  + add < s2->table_size)
+			{
+				printf("square[%d + %d][%d + %d]\n", b, add2, a, add);
+				if (a == 0 && b == 0 && s2->square[b][a] == '.' && s2->square[0][1] != '.' && s2->square[1][0] != '.')
+				{
+					ft_putstr("standalone .");
+					add++;
+				}
+				if (s2->square[b + add2][a + add] != '.')
+				{
+					ft_putstr("no dot!");	
+					add++;
+				}
+				if (s2->square[b + add2][a + add] == '.')
+				{
+					ft_putstr("dot");	
+					tmp[j][i] = b + add2;
+					printf("tmp[j = %d]",tmp[j][i]);
+					i++;
+					tmp[j][i] = a + add;
+					printf("[i =%d]\n",tmp[j][i]);
+					counter++;
+				}
+				printf("\nadd = %d\n", add);
+			}
+			else
+			{
+				ft_putstr("jumping line");
+				a = s[nb].cordis[counter].x;
+				b = s[nb].cordis[counter].y;
+				add2++;
+				counter = 0;
+				printf("\nadd2 = %d\n", add2);
+				add = 0;
+			}
+		}
+		else
+			return(-1);
+	}
+	printf("add is  %d \n", add);
+	printf("add2 is  %d \n", add2);
+	if ((ft_letter(s2, s, nb, s->letter, add, add2)) == 0)
+		return (1);
+	ft_putnbr(4);
+	return (1);
 }
 
 int		ft_if_fits(t_table *s2, t_tetra tab)
@@ -193,7 +155,6 @@ int		ft_if_fits(t_table *s2, t_tetra tab)
 	int counter;
 	int	a;
 	int	b;
-
 	counter = 0;
 	while (counter < 4)
 	{
@@ -203,8 +164,8 @@ int		ft_if_fits(t_table *s2, t_tetra tab)
 			return (-1);
 		else
 			counter++;
-	}
-	return (1);
+		}
+	return (0);
 }
 
 int		place(t_table *s2, t_tetra *s, int nb)
@@ -213,6 +174,7 @@ int		place(t_table *s2, t_tetra *s, int nb)
 	int j;
 	int counter;
 	static int nb_tetros;
+	char **tmp;
 	counter = 3;
 	i = 0;
 	j = 0;
@@ -222,17 +184,26 @@ int		place(t_table *s2, t_tetra *s, int nb)
 			return (-1);
 		else
 		{
-			if ((ft_letter(s2, s, nb, s->letter++)) == 0) // letter might has to be incremented elswhere
+			if ((ft_letter(s2, s, nb, s->letter, 0,  0)) == 0) // letter might has to be incremented elswhere
 				nb_tetros++;
+			tmp = tempo(s2);
 			return (1);
 		}
 	}
 	else  	// if we are not at the first one
 	{
-		if ((calc(s2, s, nb_tetros)) < 0)
-			return (-1);	
+		ft_putstr("here");
+		if ((ft_if_fits(s2, s[nb])) < 0)
+			return (-1);
+		
+		else
+			ft_putstr("didnt work");
+		if ((ft_compare(s2, s, nb)) <  0)
+			return (-1);
+		//if ((calc(s2, s, nb_tetros)) < 0)
+		//	return (-1);	this a function to optimize/make it faster by checking if it will fit based on the dots and connections, it The connections part doesnt work.
 
 	}
-	//compare if fits and see if it would fit with moving
+	//compare if fits and see if it would fit with moving*/
 	return (1);
 }

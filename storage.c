@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/12 13:54:38 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/18 18:47:25 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,56 +181,6 @@ void		save_cordis(t_tetra **s, int nb)// saves coordinates. Could make faster wi
 			}
 			i++;
 		}
-		m++;
-	}
-}
-
-//Printing functions
-
-void		ft_print_table(t_table *t)
-{
-	int	m;
-	int	j;
-
-	m = 0;
-	ft_putchar('\n');
-	while (m < t->table_size)
-	{
-		j = 0;
-		while (j < t->table_size)
-		{
-			ft_putchar(t->square[m][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		m++;
-	}
-	ft_putchar('\n');
-}
-
-void		ft_print_tetros(t_tetra *t)
-{
-	int m;
-	int i;
-	int j;
-
-	ft_putchar('\n');
-	m = 0;
-	while (m < t->total_tetroes)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			j = 0;
-			while (j < 4)
-			{
-				ft_putnbr(t[m].tab[i][j]);
-				j++;
-			}
-			ft_putchar('\n');
-			i++;
-		}
-		ft_putchar('\n');
 		m++;
 	}
 }

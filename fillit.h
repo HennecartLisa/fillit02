@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/12 20:48:12 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/19 12:56:48 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ int				ft_check_connections(char *str, char c);
 char			**ft_create_double_array(int x, int y);
 t_tetra			*ft_store_teros(char **tetros, int nb, int *connect);
 void			save_cordis(t_tetra **s, int nb);
-void			ft_print_table(t_table *t);
-void			ft_print_tetros(t_tetra *t);
 
 /*
  * create_table.c
@@ -102,5 +100,12 @@ int			check_if_possible(t_table *s2, int x, t_tetra *s, int nb);
 int		place(t_table *s2, t_tetra *s, int nb);//, int l);
 void		delete_table (t_table *s2);
 
+/*
+ * placing.c
+ */
+
+void			ft_print_table(t_table *t);
+void			ft_print_tetros(t_tetra *t);
+void			ft_print_tmp(char **str, t_table *s2);
 
 #endif
