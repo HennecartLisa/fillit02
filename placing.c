@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/19 20:45:56 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/25 17:21:38 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2)//
 	{
 		a = s[nb].cordis[counter].x;
 		b = s[nb].cordis[counter].y;
-		s2->square[b + add2][a + add] = letter;
-		counter++;
+		if (s2->square[b + add2][a + add] == '.')
+		{
+			s2->square[b + add2][a + add] = letter;
+			counter++;
+		}
+		else
+			return (-1);
 	}
 	ft_print_table(s2);
 	return (0);
@@ -63,29 +68,48 @@ int		ft_compare(t_table *s2, t_tetra *s, int nb) //checks if it would fit
 		a = s[nb].cordis[counter].x;
 		if (b == 0)
 			b = s[nb].cordis[counter].y;
-		if (a + add < s2->table_size)
+		if ( b + add2 < s2->table_size)
 		{
-			b = s[nb].cordis[counter].y;
-			if (b + add2 == s2->table_size)
-				return (-1);
-			if (a == 0 && b == 0 && s2->square[b][a] == '.' && s2->square[0][1] != '.' && s2->square[1][0] != '.')
-				add++;
-			if (s2->square[b + add2][a + add] == '.')
-				counter++;
+			if (a + add < s2->table_size)
+			{
+				b = s[nb].cordis[counter].y;
+				if (b + add2 == s2->table_size)
+					return (-1);
+				if (a == 0 && b == 0 && s2->square[b][a] == '.' && s2->square[0][1] != '.' && s2->square[1][0] != '.')
+				{
+					add++;
+					counter = 0;
+				}
+				if (s2->square[b + add2][a + add] == '.')
+				{		
+					printf("s2->square[%d + %d][%d + %d]\n", b, add2, a, add);
+					counter++;
+				}
+				else
+				{
+					add++;
+					counter = 0;
+				}
+
+			}
 			else
-				add++;
+			{
+				add2++;
+				counter = 0;
+				a = s[nb].cordis[counter].x;
+				add = 0;
+			}
 		}
 		else
-		{
-			add2++;
-			counter = 0;
-			a = s[nb].cordis[counter].x;
-			add = 0;
-		}
+			return (-1);
 	}
-	if ((ft_letter(s2, s, nb, s->letter, add, add2)) == 0)
-		return (0);
-	return (0);
+	printf("add = %d add2 = %d\n", add, add2);
+	if ((ft_letter(s2, s, nb, s->letter++, add, add2)) < 0)
+		return (-1);
+	if (++nb < s->total_tetroes)
+		return (place(s2, s, nb));
+
+return (1);
 }
 
 int		ft_if_fits(t_table *s2, t_tetra tab)
@@ -116,7 +140,7 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 		ft_putstr(":(");
 		return (-1);
 	}
-		if (nb == 0)
+	if (nb == 0)
 	{
 		if ((ft_letter(s2, s, nb, s->letter, 0, 0)) == 0)//letter might has to be incremented elswhere
 			tmp = tempo(s2);
