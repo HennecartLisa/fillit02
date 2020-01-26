@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/25 17:28:19 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/26 15:17:56 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,19 @@ t_table			*ltg(char *str);
 /*
  * backtracking.c
  */
-int solver(t_table *s2, t_tetra *s);
+int				solver(t_table *s2, t_tetra *s);
 //int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
-void		delete_table (t_table *s2);
+void			delete_table (t_table *s2);
 
 /*
  * placing.c
  */
-char 		**tempo(t_table *s2);
-int			ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2);
-int			ft_compare(t_table *s2, t_tetra *s, int nb);
-int			ft_if_fits(t_table *s2, t_tetra tab);
-int			place(t_table *s2, t_tetra *s, int nb);
+
+char 			**tempo(t_table *s2);
+int				ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2);
+int				ft_compare(t_table *s2, t_tetra *s, int nb, int m);
+int				ft_if_fits(t_table *s2, t_tetra tab);
+int				place(t_table *s2, t_tetra *s, int nb);
 
 /*
  * printing.c
