@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/26 15:17:56 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/26 19:29:51 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@
 /*
  ** Global structures
  */
+
+
+
+typedef	struct	s_add // struct used in ft_compare to go through string. Needed to for saving lines.
+{
+	int a;
+	int b;
+	int add;
+	int add2;
+	int counter;
+}				t_add;
 
 typedef struct	s_coords
 {
@@ -90,10 +101,19 @@ void			delete_table (t_table *s2);
  */
 
 char 			**tempo(t_table *s2);
-int				ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2);
+int				ft_letter(t_table *s2, t_tetra *s, int nb, int letter, t_add *p);
 int				ft_compare(t_table *s2, t_tetra *s, int nb, int m);
 int				ft_if_fits(t_table *s2, t_tetra tab);
 int				place(t_table *s2, t_tetra *s, int nb);
+
+
+/*
+ * compare_func.c
+*/
+t_add	*new_line(t_add *p);
+t_add	*restart(t_add *p);
+t_add	*initialize(t_add *p);
+void	last_move(t_add *p, int m);
 
 /*
  * printing.c

@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/26 15:19:20 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/01/26 19:30:19 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,20 @@ char	**tempo(t_table *s2)
 	return (tmp);
 }
 
-int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2)//inserts
+int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter, t_add *p)//inserts. will have to take out letter variable 
 {
 	int counter;
 	int a;
 	int b;
-	int c;
 
 	counter = 0;
-	c = 0;
-	ft_putstr("have u been here?");
 	while (counter < 4)
 	{
 		a = s[nb].cordis[counter].x;
 		b = s[nb].cordis[counter].y;
-		if (s2->square[b + add2][a + add] == '.')
+		if (s2->square[b + p->add2][a + p->add] == '.')
 		{
-			s2->square[b + add2][a + add] = letter;
+			s2->square[b + p->add2][a + p->add] = letter;
 			counter++;
 		}
 		else
@@ -80,82 +77,47 @@ int		ft_letter(t_table *s2, t_tetra *s, int nb, int letter, int add, int add2)//
 	return (0);
 }
 
-
 int		ft_compare(t_table *s2, t_tetra *s, int nb,  int m) //checks if it would fit
 {
-	int counter;
-	int a;
-	int b;
-	int add;
-	int add2;
-	char **tmp;
-	int t;
-	add = 0;
-	counter = 0;
-	add2 = 0;
-	printf("m = %d\n", m);
-	printf("nb = %d\n", nb);
-	while (counter < 4)
+	t_add 	*p;
+	char 	**tmp;
+	
+	p = malloc(sizeof(t_add));
+	p = initialize(p);
+	while (p->counter < 4)
 	{
-		a = s[nb].cordis[counter].x;
-		if (b + add2 < s2->table_size)
+		if (p->b + p->add2 < s2->table_size)
 		{
-			if (a + add + m < s2->table_size)
+			p->a = s[nb].cordis[p->counter].x;
+			if (p->a + p->add + m < s2->table_size)
 			{
-				b = s[nb].cordis[counter].y;
-				if (b + add2 == s2->table_size)
+				p->b = s[nb].cordis[p->counter].y;
+				if (p->b + p->add2 == s2->table_size)
 					return (-1);
-				if (a == 0 && b == 0 && s2->square[b][a] == '.' && s2->square[0][1] != '.' && s2->square[1][0] != '.')
-				{
-					add++;
-					counter = 0;
-				}
-				if (s2->square[b + add2][a + add + m] == '.')
-				{		
-					if ( m == 0)	
-						counter++;
-					else
-					{
-						if (t == 1)
-							counter++;
-						else
-						{
-							add++;
-							counter = 0;
-							t = 1;
-						}
-					}
-				}
-				else
-				{
-					add++;
-					counter = 0;
-				}
+				s2->square[p->b + p->add2][p->a + p->add + m] == '.' ? last_move(p, m) : restart(p);
 			}
 			else
 			{
-				add2++;
-				counter = 0;
-				a = s[nb].cordis[counter].x;
-				add = 0;
+				new_line(p);
+				p->	counter = 0;
 			}
 		}
 		else
 			return (-1);
 	}
-	if ((ft_letter(s2, s, nb, s->letter++, add + m, add2)) < 0)
+	p->add = p->add + m;
+	if ((ft_letter(s2, s, nb, s->letter++, p)) < 0)
 	{	
-			//s2->square = tetri_del(s2, --s->letter);
+		//s2->square = tetri_del(s2, --s->letter);
 		//while (ft_compare(s2, s, --nb, ++m) < 1)
 		return (-1);
 		//			// go back to previous tetro 
 	}
-	if ( a + add + m == s2->table_size - 1 && b + add2 == s2->table_size - 1)
-		{
-			ft_putstr("arggh");
-			if((place(s2, s, ++nb)) < 1)
-				ft_compare(s2, s, nb - 2, m = 0);
-		}
+	if ( p->a + p->add + m == s2->table_size - 1 && p->b + p->add2 == s2->table_size - 1)
+	{
+		if((place(s2, s, ++nb)) < 1)
+			ft_compare(s2, s, nb - 2, m = 0);
+	}
 	if (++nb < s->total_tetroes)
 	{	
 		tmp = tempo(s2);
@@ -187,7 +149,11 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 {
 	char **tmp;
 	static int  m;
+	t_add *p;
 
+	p =malloc(sizeof(t_add));
+	p->add = 0;
+	p->add2 = 0;
 	if ((ft_if_fits(s2, s[nb])) < 0)
 	{
 		ft_putstr(":(");
@@ -195,7 +161,7 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 	}
 	if (nb == 0)
 	{
-		if ((ft_letter(s2, s, nb, s->letter, 0, 0)) == 0)//letter might has to be incremented elswhere
+		if ((ft_letter(s2, s, nb, s->letter, p)) == 0)//letter might has to be incremented elswhere
 			tmp = tempo(s2);
 		return (1);
 	}
@@ -208,8 +174,8 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 			ft_putstr("DECREMENTING\n");
 			while((ft_compare(s2, s, nb, ++m)) < 1) 
 			{
-				 nb--;
-				 m = 0;
+				nb--;
+				m = 0;
 			}
 
 			//ft_compare(s2, s, --nb, ++m);	
