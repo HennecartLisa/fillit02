@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/18 18:47:25 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/01 15:01:01 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,39 +148,4 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	move_up_left(&res, res[0].total_tetroes);
 	save_cordis(&res, nb);
 	return (res);
-}
-
-void		save_cordis(t_tetra **s, int nb)// saves coordinates. Could make faster with while counter < 4 so it only runs until it finds all the 1s.
-{
-	int		i;
-	int		j;
-	int		m;
-	int		counter;
-	t_tetra	*xd;
-
-	xd = *s;
-	m = 0;
-	while (m < nb - 1)
-	{
-		j = 0;
-		i = 0;
-		counter = 0;
-		while (i < 4)
-		{
-			j = 0;
-			while (j < 4)
-			{
-				if (xd[m].tab[i][j] == 1)
-				{
-					xd[m].cordis[counter].x = j;
-					xd[m].cordis[counter].y = i;
-					printf("xd[%d].cordis[%d].[%d][%d]\n", m, counter, j, i);
-					counter++;
-				}
-				j++;
-			}
-			i++;
-		}
-		m++;
-	}
 }
