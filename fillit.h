@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/01 15:46:58 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/02 14:47:00 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@
  ** Global structures
  */
 
-typedef	struct	s_c_var
+typedef	struct	s_c_var //struct used in save cordis.saves space
 {
 	int i;
 	int j;
 	int m;
 	int counter;
 }				t_c_var;
-typedef	struct	s_add // struct used in ft_compare to go through string. Needed to for saving lines.
+
+typedef	struct	s_add // struct used in ft_compare.saves space
 {
 	int a;
 	int b;
@@ -121,9 +122,12 @@ void			delete_table (t_table *s2);
 
 char			**tempo(t_table *s2);
 int				ft_letter(t_table *s2, t_tetra *s, int nb, t_add *p);
-int				ft_compare(t_table *s2, t_tetra *s, int nb, int m);
+int				ft_compare(t_table *s2, t_tetra *s, int nb, t_add *p);
 int				ft_if_fits(t_table *s2, t_tetra tab);
 int				place(t_table *s2, t_tetra *s, int nb);
+char			**make_square_bigger(int size);
+int				spozzi_is_the_best(t_table *s2, t_tetra *s, int nb, t_add *p);
+
 
 /*
  * compare_func.c
@@ -132,8 +136,9 @@ int				place(t_table *s2, t_tetra *s, int nb);
 t_add			*new_line(t_add *p);
 t_add			*restart(t_add *p);
 t_add			*initialize(t_add *p);
-int				within_table(t_table *s2, t_add *p);
-void			last_move(t_add *p, int m);
+t_add			*reinitialize(t_add *p);
+t_add			*within_table(t_add *p);
+void			last_move(t_add *p);
 
 /*
  * printing.c

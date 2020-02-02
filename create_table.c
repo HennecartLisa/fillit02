@@ -78,6 +78,11 @@ t_table	*ft_allocate(t_tetra *s, int size)
 		i++;
 	}
 	printf("min table size is: %d\n", table->table_size);
-	solver(table, s);
+	t_add		*p;
+	p = malloc(sizeof(t_add));
+	p = initialize(p);
+	spozzi_is_the_best(table, s, 0, p);
+	ft_print_table(table);
+	//solver(table, s);
 	return (table);
 }

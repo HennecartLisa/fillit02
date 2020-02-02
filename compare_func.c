@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:26:01 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/01 13:19:06 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/02 14:52:13 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ t_add	*new_line(t_add *p)
 
 t_add	*restart(t_add *p)
 {
+	ft_putstr("in restart");
+	printf("p->add = %d befoee\n", p->add);
 	p->add++;
+	printf("p->add = %d after\n", p->add);
 	p->counter = 0;
 	return (p);
 }
@@ -32,22 +35,33 @@ t_add	*initialize(t_add *p)
 	p->add = 0;
 	p->add2 = 0;
 	p->counter = 0;
+	p->move = 0;
 	return (p);
 }
 
-int		within_table(t_table *s2, t_add *p)
+t_add	*reinitialize(t_add *p)
 {
-	if (p->b + p->add2 == s2->table_size)
-		return (-1);
-	return (1);
+	p->add = 0;
+	p->add2 = 0;
+	p->counter = 0;
+	return (p);
 }
 
-void	last_move(t_add *p, int m)
+t_add	*within_table(t_add *p)
+{
+	ft_putstr("in within table\n");
+
+		p->add++;
+		p->counter = 0;
+	return (p);
+}
+
+void	last_move(t_add *p)
 {
 	int t;
-
+ft_putstr("in last move");
 	t = 0;
-	if (m == 0)
+	if (p->move == 0)
 		p->counter++;
 	else
 		t == 1 ? p->counter++ : restart(p) && t == 1;
