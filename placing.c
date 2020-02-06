@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/06 12:26:47 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:37:41 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ int		ft_letter(t_table *s2, t_tetra *s, int nb, t_add *p)
 	int a;
 	int b;
 	printf("nb = %d\n", nb);
-	printf("m = %d\n", p->move);
+	printf("m = %d\n", p->move[nb]);
 
 	counter = 0;
 	while (counter < 4)
 	{
 		a = s[nb].cordis[counter].x;
 		b = s[nb].cordis[counter].y;
-		if (s2->square[b + p->add2][a + p->add + p->move] == '.')
+		if (s2->square[b + p->add2][a + p->add + p->move[nb]] == '.')
 		{
-			s2->square[b + p->add2][a + p->add + p->move] = s->letter;
+			s2->square[b + p->add2][a + p->add + p->move[nb]] = s->letter;
 			counter++;
 		}
 		else
@@ -84,16 +84,16 @@ int		ft_compare(t_table *s2, t_tetra *s, int nb, t_add  *p) //checks if it would
 
 	int t = 0;
 	ft_putstr("\nin compare\n");
-	printf("move = %d\n", p->move);
+	printf("move = %d\n", p->move[nb]);
 	while (p->counter < 4)
 	{
 		if (p->b + p->add2 < s2->table_size)
 		{
 			p->a = s[nb].cordis[p->counter].x;
-			if (p->a + p->add + p->move < s2->table_size)
+			if (p->a + p->add + p->move[nb] < s2->table_size)
 			{
 				p->b = s[nb].cordis[p->counter].y;
-							if (p->a + p->add + p->move == s2->table_size - 1 && p->b + p->add2 == s2->table_size - 1)
+							if (p->a + p->add + p->move[nb] == s2->table_size - 1 && p->b + p->add2 == s2->table_size - 1)
 				{
 					return (0);
 				}
@@ -104,9 +104,9 @@ int		ft_compare(t_table *s2, t_tetra *s, int nb, t_add  *p) //checks if it would
 					//p->add++;
 				//	p->counter = 0;
 				}
-				if (s2->square[p->b + p->add2][p->a + p->add + p->move] == '.')
+				if (s2->square[p->b + p->add2][p->a + p->add + p->move[nb]] == '.')
 				{
-					if ( p->move == 0)
+					if ( p->move[nb] == 0)
 						p->counter++;
 					else
 					{
@@ -171,7 +171,7 @@ int		next(t_table *s2, t_tetra *s, int nb, t_add *p)
 	ft_letter(s2, s, nb, p); //insert letter
 	tmp = tempo(s2); // save in tmp
 	p = reinitialize(p);
-	p->move = 0; // null move factor
+	//p->move[nb] = 0; // null move factor
 	if (++nb < s->total_tetroes) //if stil tetroes go on
 		place(s2, s, nb);
 	else
@@ -182,10 +182,12 @@ int		next(t_table *s2, t_tetra *s, int nb, t_add *p)
 void	previous(t_table *s2, t_tetra *s, int nb, t_add *p)
 {
 		s2->square = tetri_del(s2, --s->letter);
-		++p->move; // increment moving
+		(p->move[nb]) += 1; // increment moving
 		p = reinitialize(p);//null struct values
 		ft_putstr("gkgkg");
-		ft_compare(s2, s, --nb, p); //go back to previous and move it with one
+	//	nb--;
+		printf("\nnb lisa = %d\n", nb);
+		ft_compare(s2, s, nb, p); //go back to previous and move it with one
 }
 
 int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back to backtracking via the return in case of multiple tetros
@@ -215,10 +217,11 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 			if (next(s2, s, nb, p) == 1)
 				return (1);
 	}
-		if (ft_compare(s2, s, nb, p) < 1) // if it doesn't fit
+		while (ft_compare(s2, s, nb, p) < 1) // if it doesn't fit
 		{
 			ft_putstr("no place, go back wit one\n");
-			previous(s2, s, nb, p);
+			previous(s2, s, --nb, p);
+			(p->move[nb]) += 1; // increment moving
 			next(s2, s, nb, p);
 		}
 		}

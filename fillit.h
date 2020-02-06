@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/02 14:47:00 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:23:18 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef	struct	s_add // struct used in ft_compare.saves space
 	int add;
 	int add2;
 	int counter;
-	int move;
+	int move[26];
 }				t_add;
 
 typedef struct	s_coords

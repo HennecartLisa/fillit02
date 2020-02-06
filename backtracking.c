@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/06 12:13:49 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 15:30:51 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ int		solver(t_table *s2, t_tetra *s)
 	ft_print_tetros(s);
 	ft_print_table(s2);
 	printf("nb of total tetroes = %d\n", s->total_tetroes);
+	
+	while (
+
 	end = place(s2, s, nb);//, s->letter);
 	ft_print_table(s2);
 	ft_putstr("i am back to solver\n");

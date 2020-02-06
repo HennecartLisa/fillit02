@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:26:01 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/06 12:13:33 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 13:30:07 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,17 @@ t_add	*restart(t_add *p)
 
 t_add	*initialize(t_add *p)
 {
+	int		i;
+
+	i = 0;
 	p->add = 0;
 	p->add2 = 0;
 	p->counter = 0;
-	p->move = 0;
+	while (i < 26)
+	{
+		p->move[i] = 0;
+		i++;
+	}
 	return (p);
 }
 
@@ -61,7 +68,7 @@ void	last_move(t_add *p)
 	int t;
 ft_putstr("in last move");
 	t = 0;
-	if (p->move == 0)
+	if (p->move[1] == 0)
 		p->counter++;
 	else
 		t == 1 ? p->counter++ : restart(p) && t == 1;
