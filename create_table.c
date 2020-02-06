@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:49:23 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/01 13:37:18 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:13:44 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ t_table	*ft_allocate(t_tetra *s, int size)
 	t_add		*p;
 	p = malloc(sizeof(t_add));
 	p = initialize(p);
-	spozzi_is_the_best(table, s, 0, p);
 	ft_print_table(table);
-	//solver(table, s);
+	solver(table, s);
 	return (table);
 }

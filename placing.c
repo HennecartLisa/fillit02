@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/02 19:31:18 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 12:26:47 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,37 +79,12 @@ int		ft_letter(t_table *s2, t_tetra *s, int nb, t_add *p)
 	return (0);
 }
 
-int		check(t_table *s2, t_tetra *s, int nb)
-{
-	int i;
-	int j;
-i:wq
-	  nt counter;
-	ft_putstr("here");
-	i = s[nb].cordis[counter].x;
-	while ( counter < 4)
-	{
-	while (++i < s2->table_size)
-	{	
-		j = s[nb].cordis[counter].y;
-		while (++j < s2->table_size)
-		{
-			if(s2->square[i][j] == '.')
-				counter++;
-			else
-				return(-1);
-		}
-	j = -1;
-	}
-}
-	return (1);
-}
-
 int		ft_compare(t_table *s2, t_tetra *s, int nb, t_add  *p) //checks if it would fit
 {
 
 	int t = 0;
 	ft_putstr("\nin compare\n");
+	printf("move = %d\n", p->move);
 	while (p->counter < 4)
 	{
 		if (p->b + p->add2 < s2->table_size)
@@ -124,9 +99,10 @@ int		ft_compare(t_table *s2, t_tetra *s, int nb, t_add  *p) //checks if it would
 				}
 				if (p->b + p->add2 == s2->table_size)
 				{
+					
 					return (-1);
-//					p->add++;
-//					p->counter = 0;
+					//p->add++;
+				//	p->counter = 0;
 				}
 				if (s2->square[p->b + p->add2][p->a + p->add + p->move] == '.')
 				{
@@ -192,11 +168,10 @@ int		next(t_table *s2, t_tetra *s, int nb, t_add *p)
 {
 	char **tmp;
 
-	printf("nb3 = %d\n", nb);
 	ft_letter(s2, s, nb, p); //insert letter
 	tmp = tempo(s2); // save in tmp
-	p->move = 0; // null move factor
 	p = reinitialize(p);
+	p->move = 0; // null move factor
 	if (++nb < s->total_tetroes) //if stil tetroes go on
 		place(s2, s, nb);
 	else
@@ -208,10 +183,9 @@ void	previous(t_table *s2, t_tetra *s, int nb, t_add *p)
 {
 		s2->square = tetri_del(s2, --s->letter);
 		++p->move; // increment moving
-		p = reinitialize(p);//null struct valued
-		printf("nb1 = %d\n", nb);
+		p = reinitialize(p);//null struct values
+		ft_putstr("gkgkg");
 		ft_compare(s2, s, --nb, p); //go back to previous and move it with one
-		printf("nb2 = %d\n", nb);
 }
 
 int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back to backtracking via the return in case of multiple tetros
@@ -235,98 +209,20 @@ int		place(t_table *s2, t_tetra *s, int nb) // for some reason does not go back 
 	else // if we are not at the first one
 	{
 		s->letter++;
-		ft_putstr("placing call\n");
+		ft_putstr("placing call\n");	
+		while  ((ft_compare(s2, s, nb, p) == 1))// it if does fit
+		{
+			if (next(s2, s, nb, p) == 1)
+				return (1);
+	}
 		if (ft_compare(s2, s, nb, p) < 1) // if it doesn't fit
 		{
 			ft_putstr("no place, go back wit one\n");
 			previous(s2, s, nb, p);
 			next(s2, s, nb, p);
 		}
-		if ((ft_compare(s2, s, nb, p) == 1))// it if does fit
-		{
-			ft_putstr("it does fit");
-			if (next(s2, s, nb, p) == 1)
-				return (1);
-				ft_putstr("fits\n");
-				ft_letter(s2, s, nb, p); //insert letter
-				tmp = tempo(s2); // save in tmp
-				p->move = 0; // null move factor
-				p = reinitialize(p);
-				if (++nb < s->total_tetroes) //if stil tetroes go on
-				place(s2, s, nb);
-				else
-				return (1);
 		}
-	}
 	//if ((calc(s2, s, nb_tetros)) < 0)
 	//	return (-1);	this a function to optimize/make it faster by checking if it will fit based on the dots and connections, it The connections part doesnt work.
 	return (1);
-}
-
-char **make_square_bigger(int size)//spozzi's solution.
-{
-	int i;
-	int j;
-	char **board;
-
-	i = -1;
-	while (++i < size)
-	{
-		j = -1;
-		board = (char**)malloc(sizeof(char *) * size);
-		while (++j < size)
-			board[j] = (char*)malloc(sizeof(char) * size);
-	}
-	i = -1;
-	while (++i < size)
-	{
-		j = -1;
-		while (++j < size)
-			board[i][j] = 0;
-	}
-	return (board);
-}
-
-int	spozzi_is_the_best(t_table *s2, t_tetra *s, int nb, t_add *p) // model for backtracking
-{
-	int i;
-	int j;
-	int old_nb;
-	char **current;
-	if (nb == s->total_tetroes)
-		return (1);
-	i = -1;
-	while (++i < s2->table_size)
-	{
-		j = -1;
-		while (++j < s2->table_size)
-		{
-			p->a = i;
-			p->b = j;
-			if (check(s2, s, nb) < 1)//ft_compare(s2, s, nb, p)) //just checks DOESnt moveE
-			{
-				return (-1);
-			}
-			else
-			{
-				current = s2->square;
-				printf("\nPLACED: %d @ (%d,%d)\n", nb, i, j);
-				ft_letter(s2, s, nb, p); // JUST PLACES IT!!!
-				ft_print_table(s2);
-				old_nb = nb;
-				if (spozzi_is_the_best(s2, s, ++nb, p))
-					return (1);
-				s2->square = current;
-				nb = old_nb;
-			}
-		}
-		i = -1;
-	}
-	if (nb == 0)
-	{
-		s2->square = make_square_bigger(++s->total_tetroes);
-		spozzi_is_the_best(s2, s, 0, p);
-		// ft_allocate(s, ++size);
-	}
-	return (0);
 }
