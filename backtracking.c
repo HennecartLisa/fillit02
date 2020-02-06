@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/06 15:30:51 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:30:41 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,36 @@
   }
   return (1);
   }*/
+char    **tetri_del(t_table *s2, int letter)
+{
+	int a;
+	int b;
+
+	ft_putstr("in tetri_del");
+	a = 0;
+	b = 0;
+	while (b < s2->table_size)
+	{
+		a = 0;
+		while (a < s2->table_size)
+		{
+			if (s2->square[b][a] == letter)
+				s2->square[b][a] = '.';
+			else
+				a++;
+		}
+		b++;
+	}
+	ft_putstr("table now is\n");
+	ft_print_table(s2);
+	return (s2->square);
+}
 
 void	delete_table(t_table *s2)
 {
 	int i;
 
+	ft_putstr("in delete table");
 	i = 0;
 	while (i < s2->table_size)
 	{
@@ -70,54 +95,55 @@ void	delete_table(t_table *s2)
 		i++;
 	}
 	ft_strdel(s2->square);
-	free(s2);
 	s2 = NULL;
 }
 
-int		solver(t_table *s2, t_tetra *s)
+int		solver(t_table *s2, t_tetra *s, int nb)
 {
-	int			nb;
-	int			end;
+	static int			nb;
+	int 		counter;
 	static int	size;
 
-	nb = 0;
-	ft_print_tetros(s);
+	counter = 0;
+	ft_putstr("printing table:\n");
+	printf("nb = %d\n", nb);
 	ft_print_table(s2);
-	printf("nb of total tetroes = %d\n", s->total_tetroes);
-	
-	while (
 
-	end = place(s2, s, nb);//, s->letter);
-	ft_print_table(s2);
-	ft_putstr("i am back to solver\n");
-	nb++;
+	if (nb == s->total_tetroes)
+		return (1);
+	if (counter == 1 && nb == 0) 
 	{
-		if (end == -1)//not enough space //verif(s, s2, x, y, 0)))
+		ft_putstr("deleting here\n");
+		delete_table(s2);
+		return (0);
+	}
+	else
+	{  
+		if((ft_if_fits(s2, s[nb], s2->move[nb])) < 0)//check if within table
 		{
-			ft_putstr("end is -1\n");
 			delete_table(s2);
 			ft_allocate(s, ++size);
+			return (0);
 		}
-		if (end == 0)//position already has char
+		else if((ft_compare(s2, s[nb], s2->move[nb]) < 1))//check if table is dot
 		{
-			ft_putstr("end is 0\n");
-			return (-1);
+			counter = 1;
+			ft_putstr("going to next\n");
+			nb++;
+			solver(s2, s);
 		}
-		if (end == 1)
+		else
 		{
-			ft_putstr("end is 1\n");
-			if (nb < s->total_tetroes)//if I still have tetroes
-			{
-				ft_putstr("i have to go to next tetro\n");
-				end = place(s2, s, nb);
-			}
-			else //for last line
-			{
-				ft_putstr("end of file, I am done");
-				ft_print_table(s2);
-				return (1);
-			}
+			(s2->move[nb]) += 1;
+			solver(s2, &s[nb]);
 		}
+		/*else //cannot move anymore
+		  {
+		  s2->move[nb] = 0;
+		  s2->move[--nb] += 1;
+		  tetri_del(s2, s->letter);
+		  solver(s2, &s[nb]); //go back to previous and try moving it
+		  }*/
 	}
 	return (1);
 }
