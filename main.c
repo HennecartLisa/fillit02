@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 13:22:04 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/08 11:28:51 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		main(int argc, char **argv)
 		else
 		{
 			size = 0;
+			ft_putstr("MAIN\n");
 			s = ft_allocate(tetros, size);
 			return (0);
 		}
