@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/12 11:45:35 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/08 13:50:13 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/16 18:44:57 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**tempo(t_table *s2)
 	return (tmp);
 }
 
-int		ft_letter(t_table *s2, t_tetra s, int m, int j_l)
+int		ft_letter(t_table *s2, t_tetra s, int i, int j)
 {
 	int counter;
 	int a;
@@ -40,7 +40,7 @@ int		ft_letter(t_table *s2, t_tetra s, int m, int j_l)
 	{
 		a = s.cordis[counter].x;
 		b = s.cordis[counter].y;
-		s2->square[b + j_l][a + m] = s.letter;
+		s2->square[b + i][a + j] = s.letter;
 		counter++;
 	}
 
@@ -48,40 +48,31 @@ int		ft_letter(t_table *s2, t_tetra s, int m, int j_l)
 	return (1);
 }
 
-int		ft_compare(t_table *s2, t_tetra s, int m) 
+int		ft_compare(t_table *s2, t_tetra s, int i, int j) 
 {
 	ft_putstr("\nin compare\n");
 	int a;
 	int b;
-	int j_l;
 	int counter = 0;
 
-	j_l = 0;
 	while (counter < 4)
 	{
 		a = s.cordis[counter].x;
 		b = s.cordis[counter].y;			
-
-		if(s2->square[b + j_l][a + m] == '.')
+		if (b + i >= s2->table_size || a + j >= s2->table_size)
+			return (-1);
+		if(s2->square[b + i][a + j] == '.')
 			counter++;
-		else
-		{
-			if (a + m = s2->table_size)
-			{
-			j_l++;
-			counter = 0;
-			}
-			else
+	else
 			{
 			ft_putstr("doesn't fit\n");
 			return (-1);
 		}
 	}
-	}
-	return (ft_letter(s2, s, m, j_l));
+	return (1);
 }
 
-int		ft_if_fits(t_table *s2, t_tetra s, int m)
+int		ft_if_fits(t_table *s2, t_tetra s)
 {
 	int counter;
 	int	a;
@@ -92,7 +83,7 @@ int		ft_if_fits(t_table *s2, t_tetra s, int m)
 	{
 		a = s.cordis[counter].x;
 		b = s.cordis[counter].y;
-		if (a + m >= s2->table_size || b >= s2->table_size)
+		if (a >= s2->table_size || b >= s2->table_size)
 		{
 
 			ft_putstr("runs out of table");
@@ -101,6 +92,6 @@ int		ft_if_fits(t_table *s2, t_tetra s, int m)
 			else
 			counter++;
 	}
-	ft_putstr("it fits\n");
+	ft_putstr("it seems to fit\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/08 13:50:18 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/16 18:45:01 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void			delete_table (t_table *s2);
  */
 
 char			**tempo(t_table *s2);
-int				ft_letter(t_table *s2, t_tetra s, int m, int j_l);
-int				ft_compare(t_table *s2, t_tetra s, int m);
-int				ft_if_fits(t_table *s2, t_tetra s, int m);
+int				ft_letter(t_table *s2, t_tetra s, int i, int j);
+int				ft_compare(t_table *s2, t_tetra s, int i, int j);
+int				ft_if_fits(t_table *s2, t_tetra s);
 
 /*
  * printing.c

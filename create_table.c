@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:49:23 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/08 13:50:16 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/16 18:44:59 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_table	*ft_allocate(t_tetra *s, int size)
 {
 	int		i;
 	t_table *table;
-	int		nb = 0;
 
 	i = 0;
 	if (!(table = (t_table *)malloc(sizeof(t_table))))
@@ -80,6 +79,7 @@ t_table	*ft_allocate(t_tetra *s, int size)
 	                                       }
 	printf("min table size is: %d\n", table->table_size);
 	ft_print_tetros(s);
-	solver(table, s);
-	return (table);
+	if (solver(table, s) == 1)
+		return (table);
+	return (NULL);
 }
