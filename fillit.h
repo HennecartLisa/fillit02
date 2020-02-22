@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/16 18:45:01 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 16:22:26 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_table			*ltg(char *str);
 /*
  * backtracking.c
  */
-
+void			enlarge(t_table *s2, t_tetra *s, int size);
 int				solver(t_table *s2, t_tetra *s);
 //int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
 void			delete_table (t_table *s2);

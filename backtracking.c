@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/22 15:40:21 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:23:27 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void		delete_table(t_table *s2)
 	s2 = NULL;
 }
 
+void		enlarge(t_table *s2, t_tetra *s, int size)
+{
+	//nb = 0;
+	delete_table(s2);
+	ft_allocate(s, ++size);
+}
+
 int			solver(t_table *s2, t_tetra *s)
 {
 	static int	nb;
@@ -70,6 +77,12 @@ int			solver(t_table *s2, t_tetra *s)
 		ft_putstr("mic drop\n");
 		return (1);
 	}
+	if (nb == 0 && counter == 1)
+	{
+		delete_table(s2);
+		ft_allocate(s, ++size);
+		return (1);
+	}
 	else//while (nb <=  s->total_tetroes)
 	{
 		while (i < s2->table_size)
@@ -77,17 +90,13 @@ int			solver(t_table *s2, t_tetra *s)
 			j = 0;
 			while (j < s2->table_size)
 			{
+				printf("\ns-letter = %d\n", s[nb].letter);
+
 				printf(" i = %d j = %d \n", i, j);
-				if (ft_if_fits(s2, s[nb]) < 1)
-				{
-					ft_putstr("deleting table\n");
-					nb = 0;
-					delete_table(s2);
-					ft_allocate(s, ++size);
-					return (1);
-				}
+				/*if (ft_if_fits(s2, s[nb]) < 1) // check if fits at the beginning*/
 				if (ft_compare(s2, s[nb], i, j) == 1)
 				{
+					printf("\ns-letter = %d\n", s[nb].letter);
 					ft_letter(s2, s[nb], i, j);
 					counter = 1;
 					nb++;
@@ -95,6 +104,15 @@ int			solver(t_table *s2, t_tetra *s)
 					{
 						nb--;
 						return (1);
+					}
+					else
+					{
+						ft_putstr("i am in previous backtracking");
+				printf("\nnb = %d\n", nb);
+				printf("\ns-letter = %d\n", s[nb].letter);
+
+						tetri_del(s2, s[nb].letter);
+				j++;
 					}
 				}
 				else
@@ -106,13 +124,30 @@ int			solver(t_table *s2, t_tetra *s)
 			i++;
 		}
 	}
-	if (i == s2->table_size)
+	if (i == s2->table_size) //does not fit
 	{
-		ft_putstr("deleting table\n");
+
+		ft_putstr("not good going back to previous");
+		/*ft_putstr("deleting table\n");
 		nb = 0;
 		delete_table(s2);
 		ft_allocate(s, ++size);
-		return (1);
+		//enlarge(s2, s, size);
+		return (1);*/
+		nb--;
+		return (-1);
 	}
 	return (0);
 }
+
+
+/*if (ft_if_fits(s2, s[nb]) < 1) // check if fits at the beginning
+  {
+  ft_putstr("deleting table\n");
+
+  nb = 0;
+  delete_table(s2);
+  ft_allocate(s, ++size);
+//		enlarge(s2, s, size);
+return (1);  
+}*/
