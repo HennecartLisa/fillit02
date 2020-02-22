@@ -6,13 +6,13 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/16 18:44:55 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 14:47:10 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char    **tetri_del(t_table *s2, int letter)
+char		**tetri_del(t_table *s2, int letter)
 {
 	int a;
 	int b;
@@ -37,7 +37,7 @@ char    **tetri_del(t_table *s2, int letter)
 	return (s2->square);
 }
 
-void	delete_table(t_table *s2)
+void		delete_table(t_table *s2)
 {
 	int i;
 
@@ -52,13 +52,15 @@ void	delete_table(t_table *s2)
 	s2 = NULL;
 }
 
-int		solver(t_table *s2, t_tetra *s)
+int			solver(t_table *s2, t_tetra *s)
 {
-	static  int	nb;
-	int 		counter;
+	static int	nb;
+	int			counter;
 	static int	size;
-	int i = 0;
-	int j;
+	int			i;
+	int			j;
+
+	i = 0;
 	counter = 0;
 	ft_putstr("in solver, printing table:\n");
 	printf("TOTAL TETROES = %d nb = %d\n", s->total_tetroes, nb);
@@ -70,7 +72,7 @@ int		solver(t_table *s2, t_tetra *s)
 	}
 	else//while (nb <=  s->total_tetroes)
 	{
-		if (counter == 1 && nb == 0) 
+		if (counter == 1 && nb == 0)
 		{
 			ft_putstr("deleting here\n");
 			nb = 0;
@@ -82,16 +84,15 @@ int		solver(t_table *s2, t_tetra *s)
 			j = 0;
 			while (j < s2->table_size)
 			{
-				printf(" i = %d j = %d \n", i ,j);
+				printf(" i = %d j = %d \n", i, j);
 				if (ft_if_fits(s2, s[nb]) < 1)
 				{
 					ft_putstr("deleting table\n");
 					nb = 0;
 					delete_table(s2);
 					ft_allocate(s, ++size);
-
 				}
-				if (ft_compare(s2, s[nb], i , j) == 1)
+				if (ft_compare(s2, s[nb], i, j) == 1)
 				{
 					ft_letter(s2, s[nb], i, j);
 					nb++;
@@ -107,46 +108,11 @@ int		solver(t_table *s2, t_tetra *s)
 		}
 	}
 	if (i == s2->table_size)
-	{	ft_putstr("deleting table\n");
+	{
+		ft_putstr("deleting table\n");
 		nb = 0;
 		delete_table(s2);
 		ft_allocate(s, ++size);
 	}
 	return (0);
 }
-
-
-
-/*	else
-	{  
-	printf("m = %u\n", s2->move[nb]);
-	if ((ft_if_fits(s2, s[nb], s2->move[nb])) < 0)//check if within table
-	{
-	ft_putstr("deleting table\n");
-	nb = 0;
-	delete_table(s2);
-	ft_allocate(s, ++size);
-	counter++;
-	}
-	else if((ft_compare(s2, s[nb], s2->move[nb]) == 1))//check if table is dot
-	{
-	counter = 1;
-	ft_putstr("going to next\n");
-	nb++;
-	solver(s2, s);
-	}
-	else
-	{
-	ft_putstr("moving");
-	(s2->move[nb]) += 1;
-	solver(s2, s);
-	}
-	else //cannot move anymore
-	{
-	s2->move[nb] = 0;
-	s2->move[--nb] += 1;
-	tetri_del(s2, s->letter);
-	solver(s2, &s[nb]); //go back to previous and try moving it
-	}
-	}*/
-
