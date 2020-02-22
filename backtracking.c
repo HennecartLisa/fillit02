@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/22 17:26:55 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:33:10 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,13 @@ int			solver(t_table *s2, t_tetra *s)
 						nb--;
 						return (1);
 					}
-					else
 					{
 						ft_putstr("i am in previous backtracking");
-				printf("\nnb = %d\n", nb);
-				printf("\ns-letter = %d\n", s[nb].letter);
+						printf("\nnb = %d\n", nb);
+						printf("\ns-letter = %d\n", s[nb].letter);
 
 						tetri_del(s2, s[nb].letter);
-				j++;
+						j++;
 					}
 				}
 				else
@@ -119,6 +118,13 @@ int			solver(t_table *s2, t_tetra *s)
 			i++;
 		}
 	}
+	if (nb == 0 && counter == 0) //&& s->total_tetroes == 1)
+	{
+		delete_table(s2);
+		ft_allocate(s, ++size);
+		return (1);
+	}
+
 	if (nb == 0 && counter == 1)
 	{
 		delete_table(s2);
@@ -130,9 +136,9 @@ int			solver(t_table *s2, t_tetra *s)
 
 		ft_putstr("not good going back to previous");
 		/*ft_putstr("deleting table\n");
-		nb = 0;
-		delete_table(s2);
-		ft_allocate(s, ++size);
+		  nb = 0;
+		  delete_table(s2);
+		  ft_allocate(s, ++size);
 		//enlarge(s2, s, size);
 		return (1);*/
 		nb--;
