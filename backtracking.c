@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   baktracking.c                                      :+:      :+:    :+:   */
+/*   backtracking.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/22 17:33:10 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:52:38 by aben-azz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char		**tetri_del(t_table *s2, int letter)
 	int a;
 	int b;
 
-	ft_putstr("in tetri_del");
 	a = 0;
 	b = 0;
 	while (b < s2->table_size)
@@ -32,8 +31,6 @@ char		**tetri_del(t_table *s2, int letter)
 		}
 		b++;
 	}
-	ft_putstr("table now is\n");
-	ft_print_table(s2);
 	return (s2->square);
 }
 
@@ -41,7 +38,6 @@ void		delete_table(t_table *s2)
 {
 	int i;
 
-	ft_putstr("in delete table");
 	i = 0;
 	while (i < s2->table_size)
 	{
@@ -54,7 +50,6 @@ void		delete_table(t_table *s2)
 
 void		enlarge(t_table *s2, t_tetra *s, int size)
 {
-	//nb = 0;
 	delete_table(s2);
 	ft_allocate(s, ++size);
 }
@@ -69,29 +64,17 @@ int			solver(t_table *s2, t_tetra *s)
 
 	i = 0;
 	counter = 0;
-	ft_putstr("in solver, printing table:\n");
-	printf("TOTAL TETROES = %d nb = %d\n", s->total_tetroes, nb);
-	ft_print_table(s2);
 	if (nb == s->total_tetroes)
-	{
-		ft_putstr("mic drop\n");
 		return (1);
-	}
-
-	else//while (nb <=  s->total_tetroes)
+	else
 	{
 		while (i < s2->table_size)
 		{
 			j = 0;
 			while (j < s2->table_size)
 			{
-				printf("\ns-letter = %d\n", s[nb].letter);
-
-				printf(" i = %d j = %d \n", i, j);
-				/*if (ft_if_fits(s2, s[nb]) < 1) // check if fits at the beginning*/
 				if (ft_compare(s2, s[nb], i, j) == 1)
 				{
-					printf("\ns-letter = %d\n", s[nb].letter);
 					ft_letter(s2, s[nb], i, j);
 					counter = 1;
 					nb++;
@@ -100,61 +83,31 @@ int			solver(t_table *s2, t_tetra *s)
 						nb--;
 						return (1);
 					}
-					{
-						ft_putstr("i am in previous backtracking");
-						printf("\nnb = %d\n", nb);
-						printf("\ns-letter = %d\n", s[nb].letter);
-
-						tetri_del(s2, s[nb].letter);
-						j++;
-					}
-				}
-				else
-				{
-					ft_putstr("moving in line\n");
+					tetri_del(s2, s[nb].letter);
 					j++;
 				}
+				else
+					j++;
 			}
 			i++;
 		}
 	}
-	if (nb == 0 && counter == 0) //&& s->total_tetroes == 1)
+	if (nb == 0 && counter == 0)
 	{
 		delete_table(s2);
 		ft_allocate(s, ++size);
 		return (1);
 	}
-
 	if (nb == 0 && counter == 1)
 	{
 		delete_table(s2);
 		ft_allocate(s, ++size);
 		return (1);
 	}
-	if (i == s2->table_size) //does not fit
+	if (i == s2->table_size)
 	{
-
-		ft_putstr("not good going back to previous");
-		/*ft_putstr("deleting table\n");
-		  nb = 0;
-		  delete_table(s2);
-		  ft_allocate(s, ++size);
-		//enlarge(s2, s, size);
-		return (1);*/
 		nb--;
 		return (-1);
 	}
 	return (0);
 }
-
-
-/*if (ft_if_fits(s2, s[nb]) < 1) // check if fits at the beginning
-  {
-  ft_putstr("deleting table\n");
-
-  nb = 0;
-  delete_table(s2);
-  ft_allocate(s, ++size);
-//		enlarge(s2, s, size);
-return (1);  
-}*/

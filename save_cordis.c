@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_cordis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 14:54:42 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/02 14:09:35 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:42:43 by aben-azz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void		save_cordis(t_tetra **s, int nb)
 				if (xd[p->m].tab[p->i][p->j] == 1)
 				{
 					xd[p->m] = cordi(xd[p->m], p);
-					printf("xd[%d].tab[%d][%d]\n", p->m, p->i, p->j);
 					p->counter++;
 				}
 				p->j++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/22 16:22:26 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:52:33 by aben-azz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@
 # include <limits.h>
 # include "libft/libft.h"
 
-//TO DELETE !!!
-#include <stdio.h>
+/*
+** TO DELETE !!!
+*/
+# include <stdio.h>
 
 /*
- ** Global structures
- */
+** Global structures
+*/
 
-typedef	struct	s_c_var //struct used in save cordis.saves space
+typedef	struct	s_c_var
 {
 	int i;
 	int j;
@@ -58,8 +60,8 @@ typedef struct	s_table
 }				t_table;
 
 /*
- * read_file.c
- */
+** read_file.c
+*/
 
 t_tetra			*read_file(const int fd, int *connect);
 int				ft_nbt(int number_tetroes, char **str);
@@ -73,8 +75,8 @@ int				ft_charachter(char *str, int j, int n, char c);
 int				ft_check_connections(char *str, char c);
 
 /*
- * storage.c
- */
+** storage.c
+*/
 
 int				move_up(t_tetra *tetra);
 int				move_left(t_tetra *tetra);
@@ -83,16 +85,16 @@ char			**ft_create_double_array(int x, int y);
 t_tetra			*ft_store_teros(char **tetros, int nb, int *connect);
 
 /*
- * save_cordis.c
- */
+** save_cordis.c
+*/
 
 t_c_var			declare(t_c_var *p);
 t_tetra			cordi (t_tetra s, t_c_var *p);
 void			save_cordis(t_tetra **s, int nb);
 
 /*
- * create_table.c
- */
+** create_table.c
+*/
 
 t_table			*ft_allocate(t_tetra *s, int size);
 int				min_table(int i);
@@ -100,16 +102,15 @@ int				ft_sqrt(int nb);
 t_table			*ltg(char *str);
 
 /*
- * backtracking.c
- */
+** backtracking.c
+*/
 void			enlarge(t_table *s2, t_tetra *s, int size);
 int				solver(t_table *s2, t_tetra *s);
-//int        tetri_del(t_tetra *s, t_table *s2 ,int x ,int y);
 void			delete_table (t_table *s2);
 
 /*
- * placing.c
- */
+** placing.c
+*/
 
 char			**tempo(t_table *s2);
 int				ft_letter(t_table *s2, t_tetra s, int i, int j);
@@ -117,10 +118,10 @@ int				ft_compare(t_table *s2, t_tetra s, int i, int j);
 int				ft_if_fits(t_table *s2, t_tetra s);
 
 /*
- * printing.c
- */
+** printing.c
+*/
 
-void			ft_print_table(t_table *t);
+t_table			*ft_print_table(t_table *t);
 void			ft_print_tetros(t_tetra *t);
 void			ft_print_tmp(char **str, t_table *s2);
 

@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printing.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/22 18:41:46 by zszeredi          #+#    #+#             */
+/*   Updated: 2020/02/22 19:25:43 by zszeredi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-void        ft_print_table(t_table *t)
+t_table	*ft_print_table(t_table *t)
 {
-	int    m;
-	int    j;
+	int		m;
+	int		j;
 
 	m = 0;
-	ft_putchar('\n');
-	while (m < t->table_size)
+	while (t->square[m] && m < t->table_size)
 	{
 		j = 0;
-		while (j < t->table_size)
+		while (t->square[m][j] && j < t->table_size)
 		{
 			ft_putchar(t->square[m][j]);
 			j++;
@@ -18,10 +29,10 @@ void        ft_print_table(t_table *t)
 		ft_putchar('\n');
 		m++;
 	}
-	ft_putchar('\n');
+	return (t);
 }
 
-void        ft_print_tetros(t_tetra *t)
+void	ft_print_tetros(t_tetra *t)
 {
 	int m;
 	int i;
@@ -46,22 +57,4 @@ void        ft_print_tetros(t_tetra *t)
 		ft_putchar('\n');
 		m++;
 	}
-}
-
-void  ft_print_tmp(char **str, t_table *s2)
-{
-	int i = 0;
-	int j = 0;
-	while (i < s2->table_size)
-	{
-		j = 0;
-		while ( j < s2->table_size)
-		{
-			ft_putchar(str[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-	ft_putchar('\n');
 }

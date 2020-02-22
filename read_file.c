@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:07:03 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 19:25:49 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:42:38 by aben-azz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		ft_m_last_line(char **str, int number_tetroes)
 
 int		ft_nbt(int number_tetroes, char **str)
 {
-	ft_putnbr(number_tetroes);
 	if (number_tetroes < 1 || number_tetroes > 26)
 		return (-1);
 	if (number_tetroes == 1)

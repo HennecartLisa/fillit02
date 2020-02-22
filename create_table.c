@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:49:23 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/16 18:44:59 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 19:12:50 by aben-azz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-
-// Create_table. We derive the number of tetroes from storage.c, based on that we calculate the minimum size of the table and then we allocate the space for it.
 
 void	dot(char *s, int i)
 {
@@ -38,6 +36,8 @@ int		ft_sqrt(int nb)
 	return (2);
 }
 
+
+
 int		min_table(int i)
 {
 	int size;
@@ -57,7 +57,7 @@ t_table	*ft_allocate(t_tetra *s, int size)
 	int		i;
 	t_table *table;
 
-	i = 0;
+	i = -1;
 	if (!(table = (t_table *)malloc(sizeof(t_table))))
 	{
 		free(table);
@@ -66,7 +66,7 @@ t_table	*ft_allocate(t_tetra *s, int size)
 	table->table_size = min_table(s->total_tetroes + size);
 	if (!(table->square = ft_memalloc(table->table_size * sizeof(char *))))
 		return (ltg(*(*table).square));
-	while (i < table->table_size)
+	while (++i < table->table_size)
 	{
 		if (!(table->square[i] = ft_memalloc(table->table_size * sizeof(char))))
 			return (ltg(*(table->square)));
@@ -75,11 +75,8 @@ t_table	*ft_allocate(t_tetra *s, int size)
 			dot(table->square[i], table->table_size);
 			dot(*table->square, table->table_size);
 		}
-		i++;
-	                                       }
-	printf("min table size is: %d\n", table->table_size);
-	ft_print_tetros(s);
+	}
 	if (solver(table, s) == 1)
-		return (table);
+		return (ft_print_table(table));
 	return (NULL);
 }
