@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/22 17:23:27 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:26:55 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,7 @@ int			solver(t_table *s2, t_tetra *s)
 		ft_putstr("mic drop\n");
 		return (1);
 	}
-	if (nb == 0 && counter == 1)
-	{
-		delete_table(s2);
-		ft_allocate(s, ++size);
-		return (1);
-	}
+
 	else//while (nb <=  s->total_tetroes)
 	{
 		while (i < s2->table_size)
@@ -123,6 +118,12 @@ int			solver(t_table *s2, t_tetra *s)
 			}
 			i++;
 		}
+	}
+	if (nb == 0 && counter == 1)
+	{
+		delete_table(s2);
+		ft_allocate(s, ++size);
+		return (1);
 	}
 	if (i == s2->table_size) //does not fit
 	{
