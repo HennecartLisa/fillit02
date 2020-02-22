@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 10:35:22 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/22 14:47:10 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/22 15:40:21 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,6 @@ int			solver(t_table *s2, t_tetra *s)
 	}
 	else//while (nb <=  s->total_tetroes)
 	{
-		if (counter == 1 && nb == 0)
-		{
-			ft_putstr("deleting here\n");
-			nb = 0;
-			delete_table(s2);
-			return (0);
-		}
 		while (i < s2->table_size)
 		{
 			j = 0;
@@ -91,12 +84,18 @@ int			solver(t_table *s2, t_tetra *s)
 					nb = 0;
 					delete_table(s2);
 					ft_allocate(s, ++size);
+					return (1);
 				}
 				if (ft_compare(s2, s[nb], i, j) == 1)
 				{
 					ft_letter(s2, s[nb], i, j);
+					counter = 1;
 					nb++;
-					solver(s2, s);
+					if ((solver(s2, s) == 1))
+					{
+						nb--;
+						return (1);
+					}
 				}
 				else
 				{
@@ -113,6 +112,7 @@ int			solver(t_table *s2, t_tetra *s)
 		nb = 0;
 		delete_table(s2);
 		ft_allocate(s, ++size);
+		return (1);
 	}
 	return (0);
 }
