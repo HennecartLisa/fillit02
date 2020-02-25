@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   create_table.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 16:49:23 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/16 18:44:59 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:28:50 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-
-// Create_table. We derive the number of tetroes from storage.c, based on that we calculate the minimum size of the table and then we allocate the space for it.
 
 void	dot(char *s, int i)
 {
@@ -38,6 +36,8 @@ int		ft_sqrt(int nb)
 	return (2);
 }
 
+
+
 int		min_table(int i)
 {
 	int size;
@@ -55,31 +55,28 @@ t_table	*ltg(char *str)
 t_table	*ft_allocate(t_tetra *s, int size)
 {
 	int		i;
-	t_table *table;
+	t_table *s2;
 
-	i = 0;
-	if (!(table = (t_table *)malloc(sizeof(t_table))))
+	i = -1;
+	if (!(s2 = (t_table *)malloc(sizeof(t_table))))
 	{
-		free(table);
-		table = NULL;
+		free(s2);
+		s2 = NULL;
 	}
-	table->table_size = min_table(s->total_tetroes + size);
-	if (!(table->square = ft_memalloc(table->table_size * sizeof(char *))))
-		return (ltg(*(*table).square));
-	while (i < table->table_size)
+	s2->table_size = min_table(s->total_tetroes + size);
+	if (!(s2->square = ft_memalloc(s2->table_size * sizeof(char *))))
+		return (ltg(*(*s2).square));
+	while (++i < s2->table_size)
 	{
-		if (!(table->square[i] = ft_memalloc(table->table_size * sizeof(char))))
-			return (ltg(*(table->square)));
+		if (!(s2->square[i] = ft_memalloc(s2->table_size * sizeof(char))))
+			return (ltg(*(s2->square)));
 		else
 		{
-			dot(table->square[i], table->table_size);
-			dot(*table->square, table->table_size);
+			dot(s2->square[i], s2->table_size);
+			dot(*s2->square, s2->table_size);
 		}
-		i++;
-	                                       }
-	printf("min table size is: %d\n", table->table_size);
-	ft_print_tetros(s);
-	if (solver(table, s) == 1)
-		return (table);
+	}
+	if (solver(s2, s) == 1)
+		return (ft_print_table(s2));
 	return (NULL);
 }

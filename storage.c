@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   storage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/01 15:01:01 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:32:50 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		move_up_left(t_tetra **t, int nb)
 }
 
 /*
- *  Take index and create a double char array set to NULL and return it
+ **  Take index and create a double char array set to NULL and return it
  */
 
 char		**ft_create_double_array(int x, int y)
@@ -104,14 +104,29 @@ char		**ft_create_double_array(int x, int y)
 	}
 	return (str_d);
 }
+void		**ft_delete_double_array(void **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		ft_memdel(&str[i]);
+		i++;
+	}
+	ft_memdel(str);
+	str = NULL;
+
+	return (str);
+}
 
 /*
- * take a double char array full with tetrominos and the number of tetrominos
- * and return a t_tetra structure array whit in each dimention
- *      tab[4][4] fot the tetro and the total number of tetros
+ ** take a double char array full with tetrominos and the number of tetrominos
+ ** and return a t_tetra structure array whit in each dimention
+ **      tab[4][4] fot the tetro and the total number of tetros
  */
 
-t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
+t_tetra		*ft_store_teros(char **tetros, int nb)
 {
 	t_tetra *res;
 	int		i;
@@ -119,33 +134,25 @@ t_tetra		*ft_store_teros(char **tetros, int nb, int *connect)
 	int		m;
 	int		n;
 
-	res = malloc((nb) * sizeof(t_tetra));
-	i = 0;
-	while (i < nb - 1)
+	if (!(res = malloc((nb) * sizeof(t_tetra))))
+		return (NULL);
+	i = -1;
+	while (++i < nb - 1)
 	{
-		m = 0;
+		m = -1;
 		j = 0;
 		res[i].total_tetroes = nb - 1;
-		res[i].connections = connect[i];
 		res[i].letter = 'A' + i;
-		while (m < 4)
+		while (++m < 4)
 		{
-			n = 0;
-			while (n < 4)
-			{
-				if (tetros[i][j] == '.')
-					res[i].tab[m][n] = 0;
-				else
-					res[i].tab[m][n] = 1;
-				j++;
-				n++;
-			}
+			n = -1;
+			while (++n < 4)
+				res[i].tab[m][n] = tetros[i][j++] != '.';
 			j++;
-			m++;
 		}
-		i++;
 	}
 	move_up_left(&res, res[0].total_tetroes);
 	save_cordis(&res, nb);
+	ft_delete_double_array((void **)tetros);
 	return (res);
 }

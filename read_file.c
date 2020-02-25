@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 16:07:03 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/11 19:25:49 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:32:55 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		ft_m_last_line(char **str, int number_tetroes)
 
 int		ft_nbt(int number_tetroes, char **str)
 {
-	ft_putnbr(number_tetroes);
 	if (number_tetroes < 1 || number_tetroes > 26)
 		return (-1);
 	if (number_tetroes == 1)
@@ -68,7 +67,7 @@ t_tetra	*let_it_go(char *str)
 	return (NULL);
 }
 
-t_tetra	*read_file(const int fd, int *connect)
+t_tetra	*read_file(const int fd)
 {
 	int		i;
 	int		ret;
@@ -85,12 +84,12 @@ t_tetra	*read_file(const int fd, int *connect)
 	{
 		buf[ret] = '\0';
 		str[i] = ft_strdup(buf);
-		if ((check_charachters(str[i], &connect[i])) < 1)
+		if ((check_charachters(str[i])) < 1)
 			return (let_it_go(str[i]));
 		number_tetroes++;
 		i++;
 	}
 	if ((ft_nbt(number_tetroes, str)) < 1)
 		return (let_it_go(str[i]));
-	return (ft_store_teros(str, number_tetroes + 1, connect));
+	return (ft_store_teros(str, number_tetroes + 1));
 }

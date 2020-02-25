@@ -6,7 +6,7 @@
 /*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 13:36:54 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/01/12 12:22:54 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:32:51 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_charachter(char *str, int j, int n, char c)
 	return (n);
 }
 
-int		ft_check_for_charachter(char *str, int x, int *connect)
+int		ft_check_for_charachter(char *str, int x)
 {
 	int j;
 	int counter1;
@@ -66,7 +66,7 @@ int		ft_check_for_charachter(char *str, int x, int *connect)
 	str[j] = '\0';
 	if (counter1 != 4 || counter2 != 12 || counter3 != x)
 		return (-1);
-	if ((*connect = ft_check_connections(str, '#')) < 0)
+	if ((tmp = ft_check_connections(str, '#')) < 0)
 		return (-1);
 	return (1);
 }
@@ -78,7 +78,7 @@ int		ft_check_nl(char *str)
 	return (1);
 }
 
-int		check_charachters(char *str, int *connect)
+int		check_charachters(char *str)
 {
 	int len;
 
@@ -88,10 +88,10 @@ int		check_charachters(char *str, int *connect)
 	if ((ft_check_nl(str) < 0))
 		return (-1);
 	if (len == 20)
-		if ((ft_check_for_charachter(str, 4, connect)) < 0)
+		if ((ft_check_for_charachter(str, 4)) < 0)
 			return (-1);
 	if (len == 21)
-		if ((ft_check_for_charachter(str, 5, connect)) < 0)
+		if ((ft_check_for_charachter(str, 5)) < 0)
 			return (-1);
 	return (1);
 }

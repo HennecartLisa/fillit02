@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zszeredi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 16:06:07 by zszeredi          #+#    #+#             */
-/*   Updated: 2020/02/16 18:44:54 by zszeredi         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:32:48 by zszeredi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,53 +16,30 @@ int		ft_error(int n)
 {
 	if (n == 1)
 		write(1, "usage", 5);
-	if (n == 2)
-		write(1, "wrong file", 10);
 	else
-		write(1, "else", 4);
-	return (0);
+		ft_putstr("error\n");
+	return (1);
 }
 
 int		main(int argc, char **argv)
 {
 	int		fd;
-	t_tetra	*tetros;
-	int		*connect;
-	t_table *s;
-	int size;
+	t_tetra	*s;
+	t_table *s2;
 
-
-	connect = ft_memalloc(26 * sizeof(int));
+	s = NULL;
 	if (*argv && argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd <= 0)
-		{
-			ft_error(1);
-			return (1);
-		}
-		if ((tetros = read_file(fd, connect)) == NULL)
-		{
-			ft_error(2);
-			return (1);
-		}
+			return (ft_error(1));
+		if ((s = read_file(fd)) == NULL)
+			return (ft_error(2));
 		else
 		{
-			size = 0;
-			ft_putstr("MAIN\n");
-			s = ft_allocate(tetros, size);
+			s2 = ft_allocate(s, 0);
 			return (0);
 		}
 	}
-		// {
-		//   if (s)
-		//     delete_table(s);
-		// s = ft_allocate(tetros, size++);
-
-		//  }*/
-	//	ft_print_tetros(tetros);
-	//	tetrim = storage(4, fd);
-	//	else
-	//		ft_error(3);
 	return (0);
 }
