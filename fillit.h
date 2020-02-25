@@ -6,7 +6,11 @@
 /*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 10:24:02 by zszeredi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/02/25 14:32:53 by zszeredi         ###   ########.fr       */
+=======
+/*   Updated: 2020/02/22 18:52:33 by aben-azz         ###   ########.fr       */
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +107,11 @@ t_table			*ltg(char *str);
 */
 void			enlarge(t_table *s2, t_tetra *s, int size);
 int				solver(t_table *s2, t_tetra *s);
+<<<<<<< HEAD
 t_table			*delete_table (t_table *s2);
+=======
+void			delete_table (t_table *s2);
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 
 /*
 ** placing.c

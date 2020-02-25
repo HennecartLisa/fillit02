@@ -6,7 +6,11 @@
 /*   By: zszeredi <zszeredi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 12:09:02 by zszeredi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/02/25 14:32:50 by zszeredi         ###   ########.fr       */
+=======
+/*   Updated: 2020/02/22 18:51:36 by aben-azz         ###   ########.fr       */
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +91,13 @@ void		move_up_left(t_tetra **t, int nb)
 }
 
 /*
+<<<<<<< HEAD
  **  Take index and create a double char array set to NULL and return it
  */
+=======
+**  Take index and create a double char array set to NULL and return it
+*/
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 
 char		**ft_create_double_array(int x, int y)
 {
@@ -121,10 +130,17 @@ void		**ft_delete_double_array(void **str)
 }
 
 /*
+<<<<<<< HEAD
  ** take a double char array full with tetrominos and the number of tetrominos
  ** and return a t_tetra structure array whit in each dimention
  **      tab[4][4] fot the tetro and the total number of tetros
  */
+=======
+** take a double char array full with tetrominos and the number of tetrominos
+** and return a t_tetra structure array whit in each dimention
+**      tab[4][4] fot the tetro and the total number of tetros
+*/
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 
 t_tetra		*ft_store_teros(char **tetros, int nb)
 {
@@ -134,8 +150,12 @@ t_tetra		*ft_store_teros(char **tetros, int nb)
 	int		m;
 	int		n;
 
+<<<<<<< HEAD
 	if (!(res = malloc((nb) * sizeof(t_tetra))))
 		return (NULL);
+=======
+	res = malloc((nb) * sizeof(t_tetra));
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 	i = -1;
 	while (++i < nb - 1)
 	{
@@ -147,7 +167,14 @@ t_tetra		*ft_store_teros(char **tetros, int nb)
 		{
 			n = -1;
 			while (++n < 4)
+<<<<<<< HEAD
 				res[i].tab[m][n] = tetros[i][j++] != '.';
+=======
+			{
+				res[i].tab[m][n] = tetros[i][j] != '.';
+				j++;
+			}
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 			j++;
 		}
 	}

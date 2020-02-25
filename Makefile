@@ -23,7 +23,11 @@ all: getlibft $(NAME)
 $(NAME): *.o
 	@gcc $(FLAGS) *.c libft/libft.a -o $(NAME)
 	@#for check if your code is strong
+<<<<<<< HEAD
 	@#gcc $(FLAGS) *.c libft/libft.a -o $(NAME)
+=======
+	@#gcc $(FLAGS) *.c libft/libft.a -fsanitize=address -o $(NAME)
+>>>>>>> 013b98f415153171ca627e0bde26d963b20acdb3
 	@#for check leaks and location of segfault (if there is) and code problem +
 	@#gcc  $(FLAGS) *.c libft/libft.a -g -v -o $(NAME)
 	@printf "$(GREEN)Compilation of fillit with fsanitize succeded.\n$(END)"
